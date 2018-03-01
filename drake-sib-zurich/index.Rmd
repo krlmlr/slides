@@ -1,7 +1,7 @@
 ---
-title: "Reproducible workflows with ![](images/R_logo_45.png)"
+title: "Make-like declarative workflows with ![](images/R_logo_45.png)"
 author: "Kirill Müller"
-date: "Tel Aviv, 2017-09-11"
+date: "Zurich, 2018-03-05"
 output:
   xaringan::moon_reader:
     lib_dir: docs/libs
@@ -13,6 +13,9 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
+options(width = 66)
+library(magrittr)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 background-image: url(images/the_difference.png)
@@ -278,7 +281,7 @@ background-position: 0% 90%
 
 # `remake.yml`
 
-```{r echo=FALSE}
+```{r remake, echo=FALSE}
 knitr::asis_output(
   paste(collapse = "\n", c(
     "```yaml",
@@ -291,55 +294,107 @@ knitr::asis_output(
 
 ---
 
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+```{r cleanup, include = FALSE}
+unlink(".drake", recursive = TRUE)
+```
+
+```{r drake-plan}
+library(drake)
+library(cooking)
+
+plan <- drake_plan(
+  ragout = combine(fried_meat, with = "vegetables"),
+  fried_meat = fry(chopped_meat, with = "oil"),
+  chopped_meat = chop(file_in("raw_meat.csv")),
+  strings_in_dots = "literals"
+)
+
+plan
+```
+
+---
+
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+```{r drake-plan-vis, echo = FALSE, message = FALSE}
+drake_config(plan) %>%
+  vis_drake_graph(
+    full_legend = FALSE,
+    make_imports = FALSE,
+    build_times = "none",
+    width = 700,
+    height = 450
+  )
+```
+
+---
+
 class: inverse, center, middle
 
-# `remake::make()`
+# `drake::make(plan)`
 
 ---
 
 # Cooking, finally!
 
-```{r echo=FALSE}
-unlink(".remake", recursive = TRUE, force = TRUE)
-options(width = 66)
-```
-
-```{r collapse = TRUE}
-remake::make()
-remake::make()
-remake::fetch("ragout")
+```{r cooking, collapse = TRUE}
+make(plan)
+readd("ragout")
 ```
 
 ---
 
-class: center
-
-# `remake::diagram()`
-
-```{r echo=FALSE}
-remake::diagram()
+```{r drake-plan-vis-2, echo = FALSE, message = FALSE}
+drake_config(plan) %>%
+  vis_drake_graph(
+    full_legend = FALSE,
+    make_imports = FALSE,
+    build_times = "none",
+    width = 700,
+    height = 450
+  )
 ```
 
 ---
 
-# `remake.yml`, spice it up!
+# Cooking again?
 
-```yaml
-packages:
-- cooking
+```{r cooking-2, collapse = TRUE}
+make(plan)
+```
 
-targets:
-  all:
-    depends: ragout
+---
 
-  ragout:
-    command: combine(fried_meat, with = I("vegetables"))
 
-  fried_meat:
-*    command: fry(chopped_meat, with = I(c("oil", "pepper")))
+# Spice it up!
 
-  chopped_meat:
-    command: chop("raw_meat.csv")
+```{r}
+plan <- drake_plan(
+  ragout = combine(fried_meat, with = "vegetables"),
+  fried_meat = fry(chopped_meat, with = c("oil", "pepper")), #<<
+  chopped_meat = chop(file_in("raw_meat.csv")),
+  strings_in_dots = "literals"
+)
+```
+
+---
+
+```{r drake-plan-vis-3, echo = FALSE, message = FALSE}
+drake_config(plan) %>%
+  vis_drake_graph(
+    full_legend = FALSE,
+    make_imports = FALSE,
+    build_times = "none",
+    width = 700,
+    height = 450
+  )
 ```
 
 ---
@@ -347,8 +402,8 @@ targets:
 # Peppered meat
 
 ```{r collapse = TRUE}
-remake::make(remake_file = "remake-spices.yml")
-remake::fetch("ragout")
+make(plan)
+readd("ragout")
 ```
 
 ---
