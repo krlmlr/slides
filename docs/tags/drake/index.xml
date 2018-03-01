@@ -26,5 +26,20 @@
 </description>
     </item>
     
+    <item>
+      <title>The drake R package, rstudio::conf(), San Diego</title>
+      <link>/slides/posts/drake-pitch-rstudio-conf-san-diego/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/slides/posts/drake-pitch-rstudio-conf-san-diego/</guid>
+      <description>&lt;div style=&#34;position:relative;padding-top:56.25%;&#34;&gt;
+  &lt;iframe src=&#34;../../drake-pitch-rstudio-conf-san-diego/&#34; frameborder=&#34;0&#34; allowfullscreen
+    style=&#34;position:absolute;top:0;left:0;width:100%;height:100%;&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../drake-pitch-rstudio-conf-san-diego/&#34;&gt;Full screen&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>
