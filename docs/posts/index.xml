@@ -6,10 +6,25 @@
     <description>Recent content in Posts on Slide decks by Kirill Müller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Mar 2018 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/slides/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Make-like declarative workflows with R, SIB workshop, Zurich</title>
+      <link>/slides/posts/drake-sib-zurich/</link>
+      <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/slides/posts/drake-sib-zurich/</guid>
+      <description>&lt;div style=&#34;position:relative;padding-top:56.25%;&#34;&gt;
+  &lt;iframe src=&#34;../../drake-sib-zurich/&#34; frameborder=&#34;0&#34; allowfullscreen
+    style=&#34;position:absolute;top:0;left:0;width:100%;height:100%;&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../drake-sib-zurich/&#34;&gt;Full screen&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Reproducible workflows with R, Tel Aviv R user meetup</title>

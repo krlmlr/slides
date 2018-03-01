@@ -6,15 +6,24 @@
     <description>Recent content in Tags on Slide decks by Kirill Müller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Mar 2018 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/slides/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Drake</title>
+      <link>/slides/tags/drake/</link>
+      <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/slides/tags/drake/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>R</title>
       <link>/slides/tags/r/</link>
-      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/slides/tags/r/</guid>
       <description></description>
@@ -32,7 +41,7 @@
     <item>
       <title>Reproducibility</title>
       <link>/slides/tags/reproducibility/</link>
-      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/slides/tags/reproducibility/</guid>
       <description></description>
@@ -41,7 +50,7 @@
     <item>
       <title>Workflows</title>
       <link>/slides/tags/workflows/</link>
-      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/slides/tags/workflows/</guid>
       <description></description>
