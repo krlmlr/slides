@@ -33,6 +33,8 @@ pre_chunk <- function() {
 
 colourise_chunk <- function(type) {
   function(x, options) {
+    x <- gsub(getwd(), "...", x, fixed = TRUE)
+
     ansi <- ansistrings::ansi_to_html(
       gsub(" ", "&nbsp;", htmltools::htmlEscape(x)),
       fullpage = FALSE
@@ -378,8 +380,6 @@ class: inverse, center, middle
 
 ---
 
-# Cooking, finally!
-
 ```{r cooking, collapse = TRUE}
 make(plan)
 readd("ragout")
@@ -434,8 +434,6 @@ drake_config(plan) %>%
 ```
 
 ---
-
-# Peppered meat
 
 ```{r collapse = TRUE}
 make(plan)
