@@ -1,0 +1,392 @@
+---
+title: "Reproducible workflows with ![](images/R_logo_45.png)"
+author: "Kirill Müller"
+date: "Tel Aviv, 2017-09-11"
+output:
+  xaringan::moon_reader:
+    lib_dir: docs/libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+background-image: url(images/the_difference.png)
+background-position: 20% 100%
+class: right
+# Reproducible
+
+### vs.
+
+# Replicable
+
+???
+
+Thank you.  First of all, I'd like to do a small survey, to make sure we're on the same page.  Who has already been
+
+- programmed?
+- programmed in R?
+- written a function in R?
+- installed software?
+- compiled software?
+- used Make?
+- used remake?
+
+Great!  This presentation focuses on the last two points,
+I hope this presentation will be useful to you.
+
+I'd like to start with definitions.  What is a "reproducible workflow"?
+In the context of research, we must differentiate between "reproducible" and "replicable".
+
+- **Reproducible**: Can obtain same results from same data
+- Replicable: Repeating a study gives similar conclusions
+
+Image credit: [xkcd](https://xkcd.com/242/)
+
+---
+background-image: url(images/the_difference.png)
+background-size: 120%
+background-position: 280% 100%
+
+class: inverse, center, right
+
+# Why?
+
+???
+
+Why is running on other people's computers important?
+
+- coworkers, collaborators, peer review
+- validation, verification, replication
+- different computers for development and analysis
+- your future self
+
+---
+
+background-image: url(dots/intro.png)
+background-size: contain
+background-position: 0% 90%
+
+# Other people's computers
+
+- hardware
+- software: OS version, R version and packages
+    - virtualization
+    - [`packrat`](https://rstudio.github.io/packrat/)
+- data: directory paths
+    - open data
+    - [`here`](https://github.com/krlmlr/here)
+- **workflow**: what to do how and when
+
+???
+
+Components of reproducibility
+- hardware
+- software: OS version, R version and packages
+- data: directory paths
+- **workflow**: what to run how and when
+
+
+Describe the process with a simple example:
+preparing a report that contains modeling results obtained from raw data.
+
+Cooking a ragout from a piece of raw meat.
+
+Vegetarians, please think of a substitute for the meat.
+
+---
+background-image: url(images/manuals.png)
+background-position: 50% 50%
+background-size: contain
+class: center, inverse
+
+# Manuals
+
+???
+
+This is what XKCD has to say about manuals, I think this applies to workflow descriptions as well.
+
+- the simpler the description, the more likely successful
+    - open data: download/harvest from web
+    - restricted data: operate directly on raw data
+    - cleanup scripts, avoid "manual cleaning"
+    - model estimation, analysis, ..., final report
+
+- ideally, a single script that runs everything
+    - of course, you're doing this already
+
+- unstructured description?
+
+---
+background-image: url(dots/linear.png)
+background-position: 50% 50%
+background-size: contain
+class: center, bottom
+
+# A recipe
+
+???
+
+- complete instructions to prepare the meal
+- works for humans
+- works for computers
+- **does not** work well for
+    - modification
+    - extension
+    - learning
+
+---
+background-image: url(dots/detailed-rank.png)
+background-size: contain
+class: center, bottom
+
+# Splitting the recipe
+
+???
+
+- describe as a set of transformations
+- each step has inputs, outputs, and uses a **transformation rule**
+- the inputs and outputs are called **targets**
+- vegetables?
+
+---
+background-image: url(dots/vegetables.png)
+background-size: contain
+class: center, bottom
+
+# Adding vegetables
+
+???
+
+- Easy to extend or modify
+- Rules can be reused
+
+---
+background-image: url(dots/from-raw.png)
+background-size: contain
+class: center, bottom
+
+# Putting it all together
+
+???
+
+- Outputs can be combined easily
+- Arbitrary complexity
+
+---
+
+background-image: url(dots/full.png)
+background-position: 50% 50%
+background-size: contain
+class: center, bottom
+
+# Dependency graph
+
+???
+
+- where to get food (for a truly reproducible cooking experience)
+- arbitrary complexity if the dependency structure doesn't contain cycles
+
+---
+class: inverse, center, middle
+
+# DAG
+
+???
+
+- define process as a directed acyclic graph
+- rule-based tools
+    - [GNU make](https://www.gnu.org/software/make/manual/make.html)
+    - [remake](https://github.com/richfitz/remake#readme)
+    - [drake](https://github.com/wlandau-lilly/drake#readme)
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 80%
+# `Makefile`
+
+```Makefile
+all: ragout
+
+ragout: fried_meat
+⇥       combine --with=vegetables fried_meat > ragout
+
+fried_meat: chopped_meat
+⇥       fry --with=oil chopped_meat > fried_meat
+
+chopped_meat: raw_meat
+⇥       chop raw_meat > chopped_meat
+```
+
+???
+
+- describe rules
+- **order** doesn't matter
+- redundancy
+
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 80%
+
+# `Makefile` with placeholders
+
+```Makefile
+all: ragout
+
+ragout: fried_meat
+⇥       combine --with=vegetables $< > $@
+
+fried_meat: chopped_meat
+⇥       fry --with=oil $< > $@
+
+chopped_meat: raw_meat
+⇥       chop $< > $@
+```
+
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 80%
+
+# `Makefile` with ![](images/R_logo_45.png)?
+
+```Makefile
+all: ragout
+
+ragout.rds: fried_meat.rds
+⇥       R -q -e 'library(cooking);
+                 fried_meat <- readRDS("$<");
+                 ragout <- combine(fried_meat, with = vegetables);
+                 saveRDS(ragout, "$@")'
+
+fried_meat.rds: ...
+```
+
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+# `remake.yml`
+
+```{r echo=FALSE}
+knitr::asis_output(
+  paste(collapse = "\n", c(
+    "```yaml",
+    readLines("remake.yml"),
+    "```"
+  ))
+)
+```
+
+
+---
+
+class: inverse, center, middle
+
+# `remake::make()`
+
+---
+
+# Cooking, finally!
+
+```{r echo=FALSE}
+unlink(".remake", recursive = TRUE, force = TRUE)
+options(width = 66)
+```
+
+```{r collapse = TRUE}
+remake::make()
+remake::make()
+remake::fetch("ragout")
+```
+
+---
+
+class: center
+
+# `remake::diagram()`
+
+```{r echo=FALSE}
+remake::diagram()
+```
+
+---
+
+# `remake.yml`, spice it up!
+
+```yaml
+packages:
+- cooking
+
+targets:
+  all:
+    depends: ragout
+
+  ragout:
+    command: combine(fried_meat, with = I("vegetables"))
+
+  fried_meat:
+*    command: fry(chopped_meat, with = I(c("oil", "pepper")))
+
+  chopped_meat:
+    command: chop("raw_meat.csv")
+```
+
+---
+
+# Peppered meat
+
+```{r collapse = TRUE}
+remake::make(remake_file = "remake-spices.yml")
+remake::fetch("ragout")
+```
+
+---
+
+class: inverse, center, middle
+
+# Running your analysis on other people's computers enables reproducible research.
+
+# &nbsp;
+
+# Describe your analysis as a set of<br/>**data transformations**<br/>to make it easy to run <br/>for you and for others.
+
+---
+
+background-image: url(https://avatars1.githubusercontent.com/u/1741643?v=3&s=460)
+background-size: 20%
+background-position: 0% 100%
+
+class: center, middle
+
+# Thanks!
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+
+# https://goo.gl/aC9dbl
+
+### https://github.com/krlmlr, @krlmlr
+
+???
+
+---
+
+class: inverse
+
+---
+
+background-image: url(dots/detailed-parallel.png)
+background-size: contain
+class: center, bottom
+
+# Same recipe, different inputs
