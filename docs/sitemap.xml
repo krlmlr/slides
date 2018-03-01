@@ -23,6 +23,11 @@
   </url>
   
   <url>
+    <loc>/posts/remake-r-meetup-tel-aviv/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/remake-r-meetup-zurich/</loc>
     <lastmod>2017-04-10T00:00:00+00:00</lastmod>
   </url>
@@ -101,13 +106,19 @@
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2017-04-10T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/remake/</loc>
-    <lastmod>2017-04-10T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/reproducibility/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -132,6 +143,12 @@
   <url>
     <loc>/tags/tutorial/</loc>
     <lastmod>2016-12-20T20:08:19+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/workflows/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
