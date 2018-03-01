@@ -1,9 +1,9 @@
-baseURL = "https://example.com"
+baseURL = "https://krlmlr.github.io/slides"
 languageCode = "en-us"
-title = "Hugo Theme One"
+title = "Slide decks by Kirill Müller"
 
 theme = "hugo-theme-one"
-googleAnalytics = "UA-123-45"
+#googleAnalytics = "UA-123-45"
 
 [params]
     navigation = ["archives.md", "about.md"]

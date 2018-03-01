@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hugo Theme One</title>
-    <link>/</link>
-    <description>Recent content on Hugo Theme One</description>
+    <title>Slide decks by Kirill Müller</title>
+    <link>/slides/</link>
+    <description>Recent content on Slide decks by Kirill Müller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 21 Dec 2017 03:21:00 +0800</lastBuildDate>
     
-        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/slides/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>/about/</link>
+      <link>/slides/about/</link>
       <pubDate>Thu, 21 Dec 2017 03:21:00 +0800</pubDate>
       
-      <guid>/about/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/resugary/hugo-theme-one&#34;&gt;One&lt;/a&gt; is a minimal blog theme for Hugo, which is forked from &lt;a href=&#34;https://github.com/schollz/onetwothree&#34;&gt;onetwothree&lt;/a&gt;.&lt;/p&gt;
+      <guid>/slides/about/</guid>
+      <description>&lt;p&gt;This is intended as a home for my RMarkdown-based slide decks.&lt;/p&gt;
 
-&lt;p&gt;Source code is released under the MIT license on GitHub. Feel free to use if you want to learn more or contribute.&lt;/p&gt;
+&lt;p&gt;GitHub: &lt;a href=&#34;https://github.com/krlmlr&#34;&gt;https://github.com/krlmlr&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Twitter: &lt;a href=&#34;https://twitter.com/krlmlr&#34;&gt;https://twitter.com/krlmlr&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Created using &lt;a href=&#34;https://github.com/resugary/hugo-theme-one&#34;&gt;one&lt;/a&gt;, a minimal blog theme for Hugo.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Reproducible workflows with R, Tel Aviv R user meetup</title>
-      <link>/posts/remake-r-meetup-tel-aviv/</link>
+      <link>/slides/posts/remake-r-meetup-tel-aviv/</link>
       <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>/posts/remake-r-meetup-tel-aviv/</guid>
+      <guid>/slides/posts/remake-r-meetup-tel-aviv/</guid>
       <description>&lt;div style=&#34;position:relative;padding-top:56.25%;&#34;&gt;
   &lt;iframe src=&#34;../../remake-r-meetup-tel-aviv/&#34; frameborder=&#34;0&#34; allowfullscreen
     style=&#34;position:absolute;top:0;left:0;width:100%;height:100%;&#34;&gt;&lt;/iframe&gt;
@@ -40,10 +44,10 @@
     
     <item>
       <title>Reproducible workflows with R, Zurich R user meetup</title>
-      <link>/posts/remake-r-meetup-zurich/</link>
+      <link>/slides/posts/remake-r-meetup-zurich/</link>
       <pubDate>Mon, 10 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>/posts/remake-r-meetup-zurich/</guid>
+      <guid>/slides/posts/remake-r-meetup-zurich/</guid>
       <description>&lt;div style=&#34;position:relative;padding-top:56.25%;&#34;&gt;
   &lt;iframe src=&#34;../../remake-r-meetup-zurich/&#34; frameborder=&#34;0&#34; allowfullscreen
     style=&#34;position:absolute;top:0;left:0;width:100%;height:100%;&#34;&gt;&lt;/iframe&gt;
@@ -55,10 +59,10 @@
     
     <item>
       <title>Archives</title>
-      <link>/archives/</link>
+      <link>/slides/archives/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/archives/</guid>
+      <guid>/slides/archives/</guid>
       <description></description>
     </item>
     
