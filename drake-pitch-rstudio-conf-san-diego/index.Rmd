@@ -1,0 +1,149 @@
+---
+title: "The [drake](https://github.com/ropensci/drake) R package"
+subtitle: "make for R"
+author: "Kirill Müller"
+date: "2018-02-01, rstudio::conf(), San Diego"
+output:
+  xaringan::moon_reader:
+    output_dir: "docs"
+    lib_dir: docs/libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+options(width = 65)
+knit_print.data.frame <- function(x, ...) paste0(format(as_tibble(x)), collapse = "\n")
+knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(fig.path = "index_files/figure-html/")
+```
+
+background-image: url(images/humane.png)
+
+???
+
+From Jenny's presentation: https://github.com/jennybc/what-they-forgot
+
+---
+
+```{r library, include = FALSE}
+library(drake)
+library(tidyverse)
+unlink(".drake", recursive = TRUE)
+```
+
+```{r plan}
+library(drake)
+library(tidyverse)
+plan <- drake_plan(
+  
+  raw_data = readxl::read_xlsx("raw-data.xlsx"),
+
+  data = raw_data %>%
+    mutate(Species = forcats::fct_inorder(Species)),
+  
+  hist = ggplot(data, aes(x = Petal.Width, fill = Species)) +
+    geom_histogram(),
+  
+  model = lm(Sepal.Width ~ Petal.Width + Species, data)
+  
+)
+```
+
+---
+
+```{r vis-new, echo = FALSE}
+config <- drake_config(plan, verbose = FALSE)
+vis_drake_graph(
+  config,
+  targets_only = TRUE, build_times = FALSE, full_legend = FALSE,
+  width = "100%"
+)
+```
+
+---
+
+```{r make}
+make(plan)
+```
+
+---
+
+```{r make-again}
+make(plan)
+```
+
+---
+
+```{r vis-done, echo = FALSE}
+config <- drake_config(plan, verbose = FALSE)
+vis_drake_graph(
+  config,
+  targets_only = TRUE, build_times = FALSE, full_legend = FALSE,
+  width = "100%"
+)
+```
+
+
+---
+
+```{r data}
+loadd(data, verbose = 0)
+data
+```
+
+---
+
+```{r hist}
+loadd(hist, verbose = 0)
+hist
+```
+
+---
+
+```{r model}
+loadd(model, verbose = 0)
+model
+summary(model)
+```
+
+---
+
+```{r better-plan}
+plan <- drake_plan(
+  
+  raw_data = readxl::read_xlsx("raw-data.xlsx"),
+  
+  data = raw_data %>%
+    mutate(Species = forcats::fct_inorder(Species)) %>% 
+    select(-X__1), #<<
+  
+  hist = ggplot(data, aes(x = Petal.Width, fill = Species)) +
+    geom_histogram(bins = 10), #<<
+  
+  model = lm(Sepal.Width ~ Petal.Width + Species, data)
+  
+)
+```
+
+---
+
+```{r vis-stale, echo = FALSE}
+config <- drake_config(plan, verbose = FALSE)
+vis_drake_graph(
+  config,
+  targets_only = TRUE, build_times = FALSE, full_legend = FALSE,
+  width = "100%"
+)
+```
+
+---
+
+```{r make-fixed}
+make(plan, verbose = 0)
+loadd(hist, verbose = 0)
+hist
+```
