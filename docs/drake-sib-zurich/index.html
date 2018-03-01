@@ -315,6 +315,7 @@ background-position: 0% 90%
 
 
 
+
 ```r
 library(drake)
 library(cooking)
@@ -327,13 +328,15 @@ plan &lt;- drake_plan(
 )
 
 plan
-## # A tibble: 3 x 2
-##   target       command                                     
-##   &lt;chr&gt;        &lt;chr&gt;                                       
-## 1 ragout       "combine(fried_meat, with = \"vegetables\")"
-## 2 fried_meat   "fry(chopped_meat, with = \"oil\")"         
-## 3 chopped_meat "chop(file_in(\"raw_meat.csv\"))"
 ```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;#&amp;nbsp;A&amp;nbsp;tibble:&amp;nbsp;3&amp;nbsp;x&amp;nbsp;2&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;target&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;command&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="font-style:italic"&gt;&lt;span style="color:#8a8a8a"&gt;&amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="font-style:italic"&gt;&lt;span style="color:#8a8a8a"&gt;&amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;1&lt;/span&gt;&amp;nbsp;ragout&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;combine(fried_meat,&amp;nbsp;with&amp;nbsp;=&amp;nbsp;\"vegetables\")&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;2&lt;/span&gt;&amp;nbsp;fried_meat&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;fry(chopped_meat,&amp;nbsp;with&amp;nbsp;=&amp;nbsp;\"oil\")&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;3&lt;/span&gt;&amp;nbsp;chopped_meat&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;chop(file_in(\"raw_meat.csv\"))&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;
+
 
 ---
 
@@ -356,28 +359,36 @@ class: inverse, center, middle
 # Cooking, finally!
 
 
+
 ```r
 make(plan)
-## cache /home/muelleki/git/slides/drake-sib-zurich/.drake
-## connect 2 imports: check_local_env, plan
-## connect 3 targets: ragout, fried_meat, chopped_meat
-## check 4 items: file "raw_meat.csv", chop, combine, fry
-## check 1 item: chopped_meat
-## target chopped_meat
-## check 1 item: fried_meat
-## target fried_meat
-## check 1 item: ragout
-## unload 1 item: chopped_meat
-## target ragout
-readd("ragout")
-## cache /home/muelleki/git/slides/drake-sib-zurich/.drake
-## ragout, made of
-##   fried meat, made of
-##     chopped meat, made of
-##       raw meat
-##     oil
-##   vegetables
 ```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;/home/muelleki/git/slides/drake-sib-zurich/.drake&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;4&amp;nbsp;imports:&amp;nbsp;pre_chunk,&amp;nbsp;check_local_env,&amp;nbsp;colourise_chunk,...&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;3&amp;nbsp;targets:&amp;nbsp;ragout,&amp;nbsp;fried_meat,&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;4&amp;nbsp;items:&amp;nbsp;file&amp;nbsp;"raw_meat.csv",&amp;nbsp;chop,&amp;nbsp;combine,&amp;nbsp;fry&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#00afff"&gt;target&lt;/span&gt;&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;fried_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#00afff"&gt;target&lt;/span&gt;&amp;nbsp;fried_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;ragout&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#ff5fff"&gt;unload&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#00afff"&gt;target&lt;/span&gt;&amp;nbsp;ragout&lt;/div&gt;&lt;/code&gt;
+
+
+```r
+readd("ragout")
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;/home/muelleki/git/slides/drake-sib-zurich/.drake&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;ragout,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fried&amp;nbsp;meat,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;meat,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;raw&amp;nbsp;meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;oil&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;vegetables&lt;/div&gt;&lt;/code&gt;
+
 
 ---
 
@@ -389,22 +400,26 @@ readd("ragout")
 # Cooking again?
 
 
+
 ```r
 make(plan)
-## cache /home/muelleki/git/slides/drake-sib-zurich/.drake
-## connect 2 imports: check_local_env, plan
-## connect 3 targets: ragout, fried_meat, chopped_meat
-## check 4 items: file "raw_meat.csv", chop, combine, fry
-## check 1 item: chopped_meat
-## check 1 item: fried_meat
-## check 1 item: ragout
-## All targets are already up to date.
 ```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;/home/muelleki/git/slides/drake-sib-zurich/.drake&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;4&amp;nbsp;imports:&amp;nbsp;pre_chunk,&amp;nbsp;check_local_env,&amp;nbsp;colourise_chunk,...&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;3&amp;nbsp;targets:&amp;nbsp;ragout,&amp;nbsp;fried_meat,&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;4&amp;nbsp;items:&amp;nbsp;file&amp;nbsp;"raw_meat.csv",&amp;nbsp;chop,&amp;nbsp;combine,&amp;nbsp;fry&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;fried_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;ragout&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#00afff"&gt;All&amp;nbsp;targets&amp;nbsp;are&amp;nbsp;already&amp;nbsp;up&amp;nbsp;to&amp;nbsp;date.&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;
+
 
 ---
 
 
 # Spice it up!
+
 
 
 ```r
@@ -416,6 +431,8 @@ plan &lt;- drake_plan(
 )
 ```
 
+
+
 ---
 
 <div id="htmlwidget-a261f1c13aea9e511342" style="width:700px;height:450px;" class="visNetwork html-widget"></div>
@@ -426,29 +443,37 @@ plan &lt;- drake_plan(
 # Peppered meat
 
 
+
 ```r
 make(plan)
-## cache /home/muelleki/git/slides/drake-sib-zurich/.drake
-## connect 2 imports: check_local_env, plan
-## connect 3 targets: ragout, fried_meat, chopped_meat
-## check 5 items: file "raw_meat.csv", c, chop, combine, fry
-## check 1 item: chopped_meat
-## check 1 item: fried_meat
-## load 1 item: chopped_meat
-## target fried_meat
-## check 1 item: ragout
-## unload 1 item: chopped_meat
-## target ragout
-readd("ragout")
-## cache /home/muelleki/git/slides/drake-sib-zurich/.drake
-## ragout, made of
-##   fried meat, made of
-##     chopped meat, made of
-##       raw meat
-##     oil   
-##     pepper
-##   vegetables
 ```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;/home/muelleki/git/slides/drake-sib-zurich/.drake&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;4&amp;nbsp;imports:&amp;nbsp;pre_chunk,&amp;nbsp;check_local_env,&amp;nbsp;colourise_chunk,...&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;3&amp;nbsp;targets:&amp;nbsp;ragout,&amp;nbsp;fried_meat,&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;5&amp;nbsp;items:&amp;nbsp;file&amp;nbsp;"raw_meat.csv",&amp;nbsp;c,&amp;nbsp;chop,&amp;nbsp;combine,&amp;nbsp;fry&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;fried_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#ffaf00"&gt;load&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#00afff"&gt;target&lt;/span&gt;&amp;nbsp;fried_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;ragout&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#ff5fff"&gt;unload&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#00afff"&gt;target&lt;/span&gt;&amp;nbsp;ragout&lt;/div&gt;&lt;/code&gt;
+
+
+```r
+readd("ragout")
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;/home/muelleki/git/slides/drake-sib-zurich/.drake&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;ragout,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fried&amp;nbsp;meat,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;meat,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;raw&amp;nbsp;meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;oil&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;pepper&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;vegetables&lt;/div&gt;&lt;/code&gt;
+
 
 ---
 
