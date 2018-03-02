@@ -6,3 +6,4 @@
 /.dots
 /.remake
 /.drake
+packrat/lib*/
