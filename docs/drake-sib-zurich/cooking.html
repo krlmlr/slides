@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>cooking</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Kirill Müller" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# cooking
+### Kirill Müller
+### Zurich, 2018-03-05
+
+---
+
+
+
+
+# The *cooking* package
+
+https://krlmlr.github.io/cooking
+
+https://krlmlr.github.io/cooking/reference/cooking-package.html
+
+
+
+```r
+buy(what, from = supermarket())
+
+supermarket()
+
+peel(what, ...)
+
+chop(what, ...)
+
+fry(what, ...)
+
+cook(what, ...)
+
+combine(..., name = "ragout")
+
+make_cooking(processed)
+```
+
+
+
+---
+
+# Recipe snippets
+
+
+
+```r
+library(cooking)
+chopped_meat &lt;- chop("raw_meat.csv")
+chopped_meat
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;chopped&amp;nbsp;meat,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;raw&amp;nbsp;meat&lt;/div&gt;&lt;/code&gt;
+
+
+```r
+fry(chopped_meat, with = "vegetables")
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;fried&amp;nbsp;meat,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;meat,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;raw&amp;nbsp;meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;vegetables&lt;/div&gt;&lt;/code&gt;
+
+
+```r
+peel(buy("carrots"))
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;peeled&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;raw&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;bought&amp;nbsp;at&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;supermarket&lt;/div&gt;&lt;/code&gt;
+
+
+---
+
+# The pipe
+
+
+
+```r
+"carrots" %&gt;%
+  buy() %&gt;%
+  peel() %&gt;%
+  chop() %&gt;%
+  fry(with = c("oil", "garlic", "chopped meat")) %&gt;%
+  combine("mashed potatoes")
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;ragout,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fried&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;peeled&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;raw&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;bought&amp;nbsp;at&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;supermarket&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;oil&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;garlic&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;mashed&amp;nbsp;potatoes&lt;/div&gt;&lt;/code&gt;
+
+
+---
+
+# New methods
+
+
+
+```r
+dice &lt;- make_cooking("diced", "cut from")
+dice("tomatoes")
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;diced&amp;nbsp;tomatoes,&amp;nbsp;&lt;span style="font-style:italic"&gt;cut&amp;nbsp;from&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;tomatoes&lt;/div&gt;&lt;/code&gt;
+
+
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+# Exercises
+
+1. Use `buy()` to buy meat
+2. Chop this meat
+3. Fry the chopped meat with oil
+4. Combine the fried meat with vegetables
+5. Add a salad
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -7,6 +7,7 @@ Cheat sheet!
 - quick survey
     - used R
     - written a function in R
+    - used the pipe in R
     - created a reproducible analysis with R
     - compiled code
     - run Make

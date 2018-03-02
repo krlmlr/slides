@@ -56,3 +56,74 @@ knitr::knit_hooks$set(
 )
 ```
 
+# The *cooking* package
+
+https://krlmlr.github.io/cooking
+
+https://krlmlr.github.io/cooking/reference/cooking-package.html
+
+```{r api, eval = FALSE}
+buy(what, from = supermarket())
+
+supermarket()
+
+peel(what, ...)
+
+chop(what, ...)
+
+fry(what, ...)
+
+cook(what, ...)
+
+combine(..., name = "ragout")
+
+make_cooking(processed)
+```
+
+---
+
+# Recipe snippets
+
+```{r example}
+library(cooking)
+chopped_meat <- chop("raw_meat.csv")
+chopped_meat
+fry(chopped_meat, with = "vegetables")
+peel(buy("carrots"))
+```
+
+---
+
+# The pipe
+
+```{r pipe}
+"carrots" %>%
+  buy() %>%
+  peel() %>%
+  chop() %>%
+  fry(with = c("oil", "garlic", "chopped meat")) %>%
+  combine("mashed potatoes")
+```
+
+---
+
+# New methods
+
+```{r make}
+dice <- make_cooking("diced", "cut from")
+dice("tomatoes")
+```
+
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+# Exercises
+
+1. Use `buy()` to buy meat
+2. Chop this meat
+3. Fry the chopped meat with oil
+4. Combine the fried meat with vegetables
+5. Add a salad
