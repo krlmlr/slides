@@ -159,7 +159,7 @@ dice("tomato")
 
 ## Dinner's ready!
 
-We have our `ragout`, and or `slice()` and `dice()` functions
+We have our `ragout`, and our `slice()` and `dice()` functions
 
 ```{r prepare-serve}
 ragout <- combine(fry(chop(buy("meat")), with = "oil"), with = "vegetables")
