@@ -1,4 +1,4 @@
-all: docs/index.html
+all: docs/index.html docs/cooking.html
 
 .dots: $(patsubst %.dot,%.png,$(wildcard dots/*.dot))
 	touch $@
@@ -9,5 +9,7 @@ dots/%.png: docs/dots/%.png
 docs/dots/%.png: dots/%.dot
 	dot $< -Tpng -o$@
 
-docs/index.html: index.Rmd .dots Makefile
+docs/index.html: .dots
+
+docs/%.html: %.Rmd Makefile
 	R -q -e 'rmarkdown::render("$<", output_dir = "docs")'

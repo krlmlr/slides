@@ -1,0 +1,58 @@
+---
+title: "cooking"
+author: "Kirill Müller"
+date: "Zurich, 2018-03-05"
+output:
+  xaringan::moon_reader:
+    lib_dir: docs/libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+options(width = 66)
+library(magrittr)
+knitr::opts_chunk$set(collapse = TRUE)
+
+options(crayon.enabled = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, comment = pillar::style_subtle("#>"))
+
+pre_chunk <- function() {
+  function(x, options) {
+    gsub(
+      sprintf('</code>\n<code class="remark-code %s">', tolower(options$engine)),
+      "\n",
+      x,
+      fixed = TRUE
+    )
+  }
+}
+
+colourise_chunk <- function(type) {
+  function(x, options) {
+    x <- gsub(getwd(), "...", x, fixed = TRUE)
+
+    ansi <- ansistrings::ansi_to_html(
+      gsub(" ", "&nbsp;", htmltools::htmlEscape(x)),
+      fullpage = FALSE
+    )
+
+    sprintf('<code class="remark-code %s"><div class="remark-code-line">%s</div></code>\n',
+      tolower(options$engine),
+      strsplit(ansi, "\n", fixed = TRUE)[[1]]
+    )
+  }
+}
+
+knitr::knit_hooks$set(
+  chunk = pre_chunk(),
+  output = colourise_chunk("output"),
+  message = colourise_chunk("message"),
+  warning = colourise_chunk("warning"),
+  error = colourise_chunk("error")
+)
+```
+
