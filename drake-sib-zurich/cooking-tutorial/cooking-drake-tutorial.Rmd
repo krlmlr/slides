@@ -12,21 +12,25 @@ pkgconfig::set_config_in("drake::strings_in_dots" = "literals", .in = globalenv(
 
 knitr::opts_chunk$set(collapse = TRUE)
 
-library(cooking)
+library(dplyr)
 library(drake)
+library(cooking)
 ```
 
 ## Introduction
 
 These exercises introduce the *drake* toy package using functions from *cooking*. In many cases a part of the code is given, and your task is to replace the dots `...` with something meaningful before you can run the code. All exercises on the same topic page build upon each other: If a solution is given, you can assume that objects created in the solution are available to subsequent exercises on the same topic.
 
+If an exercise comes with complete code without dots `...`, it is intended to demonstrate something. Please run the code.
+
 You will only receive feedback to questions, there's no automatic validation for the R code.
 
-The *cooking* and *drake* packages are loaded for all exercises:
+The *dplyr*, *drake*, and *cooking* packages are loaded for all exercises:
 
 ```r
-library(cooking)
+library(dplyr)
 library(drake)
+library(cooking)
 ```
 
 ## Plan to buy meat
@@ -583,5 +587,359 @@ question(
   
   answer("Because `make()` always rebuilds all targets if the command calls functions defined by the user.",
          message = "`make()` will only update the outdated targets. It will even analyze the functions defined by the user, as well as any other functions it uses.")
+)
+```
+
+## Combine the ragout
+
+In the last two topics we created three plans (and one function), which will be available for each exercise in this topic:
+
+```r
+plan_meat <- drake_plan(
+  meat = buy("meat"),
+  chopped_meat = chop(meat),
+  fried_meat = fry(chopped_meat, with = c("oil", "garlic"))
+)
+
+plan_carrots <- drake_plan(
+  carrots = buy("carrots"),
+  peeled_carrots = peel(carrots)
+)
+
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes, with = "salt")
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  potatoes = buy("potatoes"),
+  cooked_potatoes = prepare_potatoes(potatoes)
+)
+```
+
+```{r setup-combine, eval = FALSE}
+plan_meat <- drake_plan(
+  meat = buy("meat", from = "the butcher shop"),
+  chopped_meat = chop(meat),
+  fried_meat = fry(chopped_meat, with = c("oil", "garlic"))
+)
+
+plan_carrots <- drake_plan(
+  carrots = buy("carrots"),
+  peeled_carrots = peel(carrots)
+)
+
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes, with = "salt")
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  potatoes = buy("potatoes"),
+  cooked_potatoes = prepare_potatoes(potatoes)
+)
+```
+
+To create a ragout from the three components `fried_meat`, `peeled_carrots`, and `cooked_potatoes`, we need another step. Implement it in a new plan using the `combine()` function:
+
+```{r drake-combine-ragout, exercise=TRUE, exercise.setup = "setup-combine"}
+plan_ragout <- ...
+```
+
+```{r drake-combine-ragout-hint, eval = FALSE}
+plan_ragout <- drake_plan(
+  ragout = combine(fried_meat, ...)
+)
+```
+
+```{r drake-combine-ragout-solution, eval = FALSE}
+plan_ragout <- drake_plan(
+  ragout = combine(fried_meat, peeled_carrots, cooked_potatoes)
+)
+```
+
+```{r drake-combine-ragout-solution-all, eval = FALSE}
+plan_meat <- drake_plan(
+  meat = buy("meat", from = "the butcher shop"),
+  chopped_meat = chop(meat),
+  fried_meat = fry(chopped_meat, with = c("oil", "garlic"))
+)
+
+plan_carrots <- drake_plan(
+  carrots = buy("carrots"),
+  peeled_carrots = peel(carrots)
+)
+
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes, with = "salt")
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  potatoes = buy("potatoes"),
+  cooked_potatoes = prepare_potatoes(potatoes)
+)
+
+plan_ragout <- drake_plan(
+  ragout = combine(fried_meat, peeled_carrots, cooked_potatoes)
+)
+```
+
+For safe operation and optimal reproducibility, we need one single plan. How do we combine the four plans? (Hint: Remember the plans are data frames.)
+
+```{r drake-combine-plans, exercise=TRUE, exercise.setup = "drake-combine-ragout-solution-all"}
+
+```
+
+```{r drake-combine-plans-hint-1, eval = FALSE}
+plan <- bind_rows(...)
+```
+
+```{r drake-combine-plans-hint-2, eval = FALSE}
+plan <- bind_rows(plan_meat, ...)
+```
+
+```{r drake-combine-plans-solution, eval = FALSE}
+plan <- bind_rows(plan_meat, plan_carrots, plan_potatoes, plan_ragout)
+```
+
+```{r drake-combine-plans-solution-all, eval = FALSE}
+plan_meat <- drake_plan(
+  meat = buy("meat", from = "the butcher shop"),
+  chopped_meat = chop(meat),
+  fried_meat = fry(chopped_meat, with = c("oil", "garlic"))
+)
+
+plan_carrots <- drake_plan(
+  carrots = buy("carrots"),
+  peeled_carrots = peel(carrots)
+)
+
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes, with = "salt")
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  potatoes = buy("potatoes"),
+  cooked_potatoes = prepare_potatoes(potatoes)
+)
+
+plan_ragout <- drake_plan(
+  ragout = combine(fried_meat, peeled_carrots, cooked_potatoes)
+)
+
+plan <- bind_rows(plan_meat, plan_carrots, plan_potatoes, plan_ragout)
+```
+
+View the dependency graph:
+
+```{r drake-combine-view, exercise=TRUE, exercise.setup = "drake-combine-plans-solution-all"}
+
+```
+
+```{r drake-combine-view-hint, eval = FALSE}
+config <- ...
+vis_...(...)
+```
+
+Run the plan:
+
+```{r drake-combine-run, exercise=TRUE, exercise.setup = "drake-combine-plans-solution-all"}
+
+```
+
+```{r drake-combine-run-solution, eval = FALSE}
+make(plan)
+```
+
+```{r drake-combine-run-solution-all, eval = FALSE}
+plan_meat <- drake_plan(
+  meat = buy("meat", from = "the butcher shop"),
+  chopped_meat = chop(meat),
+  fried_meat = fry(chopped_meat, with = c("oil", "garlic"))
+)
+
+plan_carrots <- drake_plan(
+  carrots = buy("carrots"),
+  peeled_carrots = peel(carrots)
+)
+
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes, with = "salt")
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  potatoes = buy("potatoes"),
+  cooked_potatoes = prepare_potatoes(potatoes)
+)
+
+plan_ragout <- drake_plan(
+  ragout = combine(fried_meat, peeled_carrots, cooked_potatoes)
+)
+
+plan <- bind_rows(plan_meat, plan_carrots, plan_potatoes, plan_ragout)
+
+make(plan, verbose = FALSE)
+```
+
+Enjoy!
+
+```{r drake-combine-enjoy, exercise=TRUE, exercise.setup = "drake-combine-run-solution-all"}
+readd("ragout")
+```
+
+
+
+## Combine the ragout the wrong way
+
+The four plans and one function from the last topic will be available for each exercise in this topic:
+
+```r
+plan_meat <- drake_plan(
+  meat = buy("meat"),
+  chopped_meat = chop(meat),
+  fried_meat = fry(chopped_meat, with = c("oil", "garlic"))
+)
+
+plan_carrots <- drake_plan(
+  carrots = buy("carrots"),
+  peeled_carrots = peel(carrots)
+)
+
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes, with = "salt")
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  potatoes = buy("potatoes"),
+  cooked_potatoes = prepare_potatoes(potatoes)
+)
+
+plan_ragout <- drake_plan(
+  ragout = combine(fried_meat, peeled_carrots, cooked_potatoes)
+)
+```
+
+```{r setup-uncombine, eval = FALSE}
+plan_meat <- drake_plan(
+  meat = buy("meat", from = "the butcher shop"),
+  chopped_meat = chop(meat),
+  fried_meat = fry(chopped_meat, with = c("oil", "garlic"))
+)
+
+plan_carrots <- drake_plan(
+  carrots = buy("carrots"),
+  peeled_carrots = peel(carrots)
+)
+
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes, with = "salt")
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  potatoes = buy("potatoes"),
+  cooked_potatoes = prepare_potatoes(potatoes)
+)
+
+plan_ragout <- drake_plan(
+  ragout = combine(fried_meat, peeled_carrots, cooked_potatoes)
+)
+```
+
+Try creating the ragout by just running `plan_ragout`:
+
+```{r drake-uncombine-make-incomplete, exercise=TRUE, exercise.setup = "setup-uncombine"}
+make(plan_ragout)
+```
+
+```{r drake-uncombine-make-incomplete-all, eval = FALSE}
+plan_meat <- drake_plan(
+  meat = buy("meat", from = "the butcher shop"),
+  chopped_meat = chop(meat),
+  fried_meat = fry(chopped_meat, with = c("oil", "garlic"))
+)
+
+plan_carrots <- drake_plan(
+  carrots = buy("carrots"),
+  peeled_carrots = peel(carrots)
+)
+
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes, with = "salt")
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  potatoes = buy("potatoes"),
+  cooked_potatoes = prepare_potatoes(potatoes)
+)
+
+plan_ragout <- drake_plan(
+  ragout = combine(fried_meat, peeled_carrots, cooked_potatoes)
+)
+
+try(make(plan_ragout, verbose = FALSE))
+```
+
+Visualize the failed run:
+
+```{r drake-uncombine-make-vis, exercise=TRUE, exercise.setup = "drake-uncombine-make-incomplete-all"}
+
+```
+
+```{r drake-uncombine-make-vis-hint, eval = FALSE}
+config <- ...
+...(...)
+```
+
+What went wrong with the `ragout`?
+
+```{r drake-uncombine-make-diagnose, exercise=TRUE, exercise.setup = "drake-uncombine-make-incomplete-all"}
+diagnose(...)
+```
+
+```{r drake-uncombine-functions-quiz}
+question(
+  "Why does `make()` fail?",
+  
+  answer("Because the plan doesn't contain the `fried_meat`, `peeled_carrots` and `cooked_potatoes` targets.",
+         correct = TRUE),
+
+  answer("Because we don't have variables named `fried_meat`, `peeled_carrots` and `cooked_potatoes` in our global environment.",
+         message = "Beware! We could perhaps run such a plan, but then `fried_meat`, `peeled_carrots` and `cooked_potatoes` would not be under the control of *drake*.")
+)
+```
+
+Try running all plans in sequence, and visualizing the run. Do you see the problem?
+
+```{r drake-uncombine-make-sequence, exercise=TRUE, exercise.setup = "setup-uncombine"}
+make(plan_meat)
+make(plan_carrots)
+make(plan_potatoes)
+config <- make(plan_ragout)
+vis_drake_graph(config)
+```
+
+```{r drake-uncombine-sequence-quiz}
+question(
+  "Why does `make()` succeed?",
+  
+  answer("Because running plans in sequence effectively combines them.",
+         message = "We need to create one single plan that contains all targets for optimal reproducibility."),
+  
+  answer("Because the first three `make()` runs have created objects named `fried_meat`, `peeled_carrots` and `cooked_potatoes` in our global environment as a side effect.",
+         correct = TRUE)
 )
 ```

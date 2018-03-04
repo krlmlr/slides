@@ -141,6 +141,9 @@ https://ropensci.github.io/drake
 
 # What do we need to run?
 `outdated()`
+
+# What if a run fails?
+`diagnose()`
 ```
 
 ---
@@ -207,7 +210,7 @@ background-position: 0% 90%
 4. Buy at the butcher's instead
 5. Prepare vegetables
 6. Combine the ragout
-7. Add a vegetarian option
+7. How to **not** combine the ragout
 
 ---
 

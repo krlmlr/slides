@@ -8,11 +8,13 @@
 
 `loadd()`: Load targets into an environment
 
-# Visualization
+# Diagnosis
 
 `drake_config()`
 
 `outdated()`
+
+`diagnose()`
 
 # Project organization
 
