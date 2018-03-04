@@ -108,6 +108,31 @@ Why is running on other people's computers important?
 
 ---
 
+background-image: url(images/you.png)
+background-position: 50% 70%
+background-size: 50%
+class: center, inverse
+
+???
+
+Remember that time when you noticed that crucial data error two days prior to submission?
+
+---
+
+background-image: url(images/conflicting.png)
+background-position: 50% 50%
+background-size: contain
+class: center
+
+???
+
+There's a certain tension between making a data analysis reproducible, amendable, and fast. Usually it's easy to achieve two of the three goals.
+
+From https://cloud.smartdraw.com/editor.aspx?templateId=bfa3f50a-8818-4119-bd10-997f2ee3f60c#depoId=8495191&credID=-21599641
+
+
+---
+
 background-image: url(dots/intro.png)
 background-size: contain
 background-position: 0% 90%
@@ -118,6 +143,7 @@ background-position: 0% 90%
 - software: OS version, R version and packages
     - virtualization
     - [`packrat`](https://rstudio.github.io/packrat/)
+    - [MRAN](https://mran.microsoft.com/)
 - data: directory paths
     - open data
     - [`here`](https://github.com/krlmlr/here)
@@ -140,6 +166,7 @@ Cooking a ragout from a piece of raw meat.
 Vegetarians, please think of a substitute for the meat.
 
 ---
+
 background-image: url(images/manuals.png)
 background-position: 50% 50%
 background-size: contain
@@ -231,24 +258,18 @@ class: center, bottom
 
 - where to get food (for a truly reproducible cooking experience)
 - arbitrary complexity if the dependency structure doesn't contain cycles
-
----
-class: inverse, center, middle
-
-# DAG
-
-???
-
 - define process as a directed acyclic graph
 - rule-based tools
     - [GNU make](https://www.gnu.org/software/make/manual/make.html)
-    - [remake](https://github.com/richfitz/remake#readme)
-    - [drake](https://github.com/wlandau-lilly/drake#readme)
+    - [snakemake](https://snakemake.readthedocs.io/en/stable/)
+    - [remake](https://github.com/richfitz/remake#readme) by Rich FitzJohn
+    - [drake](https://github.com/ropensci/drake#readme) by Will Landau
+
 ---
 
 background-image: url(dots/detailed.png)
 background-size: contain
-background-position: 0% 80%
+background-position: 0% 90%
 # `Makefile`
 
 ```Makefile
@@ -274,7 +295,7 @@ chopped_meat: raw_meat
 
 background-image: url(dots/detailed.png)
 background-size: contain
-background-position: 0% 80%
+background-position: 0% 90%
 
 # `Makefile` with placeholders
 
@@ -295,7 +316,7 @@ chopped_meat: raw_meat
 
 background-image: url(dots/detailed.png)
 background-size: contain
-background-position: 0% 80%
+background-position: 0% 90%
 
 # `Makefile` with ![](images/R_logo_45.png)?
 
@@ -444,7 +465,7 @@ readd("ragout")
 
 class: inverse, center, middle
 
-# Running your analysis on other people's computers enables reproducible research.
+# Running your analysis on other people's computers enables reproducibility.
 
 # &nbsp;
 

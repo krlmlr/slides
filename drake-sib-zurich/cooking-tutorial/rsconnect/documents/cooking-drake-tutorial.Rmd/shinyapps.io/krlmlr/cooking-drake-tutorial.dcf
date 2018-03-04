@@ -1,0 +1,13 @@
+name: cooking-drake-tutorial
+title: cooking-drake-tutorial
+username:
+account: krlmlr
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 292826
+bundleId: 1252140
+url: https://krlmlr.shinyapps.io/cooking-drake-tutorial/
+when: 1520196196.58621
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: cooking-tutorial.html|cooking-tutorial.Rmd

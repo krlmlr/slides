@@ -15,14 +15,22 @@ Cheat sheet!
     - run drake
     - brought an R project to work on?
 - goals for today, talk to neighbors
+- walkthrough material
 
-# 9:15
+# 9:20
 
 - presentation
+- questions
 
-# 9:45
+# 9:50
 
-- cooking workshop
+- cooking API slides
+- learnr cooking
+- walkthrough solutions
+
+# 10:10
+
+- drake API slides
 
 # 10:30
 

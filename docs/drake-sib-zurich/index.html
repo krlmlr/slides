@@ -76,6 +76,31 @@ Why is running on other people's computers important?
 
 ---
 
+background-image: url(images/you.png)
+background-position: 50% 70%
+background-size: 50%
+class: center, inverse
+
+???
+
+Remember that time when you noticed that crucial data error two days prior to submission?
+
+---
+
+background-image: url(images/conflicting.png)
+background-position: 50% 50%
+background-size: contain
+class: center
+
+???
+
+There's a certain tension between making a data analysis reproducible, amendable, and fast. Usually it's easy to achieve two of the three goals.
+
+From https://cloud.smartdraw.com/editor.aspx?templateId=bfa3f50a-8818-4119-bd10-997f2ee3f60c#depoId=8495191&amp;credID=-21599641
+
+
+---
+
 background-image: url(dots/intro.png)
 background-size: contain
 background-position: 0% 90%
@@ -86,6 +111,7 @@ background-position: 0% 90%
 - software: OS version, R version and packages
     - virtualization
     - [`packrat`](https://rstudio.github.io/packrat/)
+    - [MRAN](https://mran.microsoft.com/)
 - data: directory paths
     - open data
     - [`here`](https://github.com/krlmlr/here)
@@ -108,6 +134,7 @@ Cooking a ragout from a piece of raw meat.
 Vegetarians, please think of a substitute for the meat.
 
 ---
+
 background-image: url(images/manuals.png)
 background-position: 50% 50%
 background-size: contain
@@ -199,24 +226,18 @@ class: center, bottom
 
 - where to get food (for a truly reproducible cooking experience)
 - arbitrary complexity if the dependency structure doesn't contain cycles
-
----
-class: inverse, center, middle
-
-# DAG
-
-???
-
 - define process as a directed acyclic graph
 - rule-based tools
     - [GNU make](https://www.gnu.org/software/make/manual/make.html)
-    - [remake](https://github.com/richfitz/remake#readme)
-    - [drake](https://github.com/wlandau-lilly/drake#readme)
+    - [snakemake](https://snakemake.readthedocs.io/en/stable/)
+    - [remake](https://github.com/richfitz/remake#readme) by Rich FitzJohn
+    - [drake](https://github.com/ropensci/drake#readme) by Will Landau
+
 ---
 
 background-image: url(dots/detailed.png)
 background-size: contain
-background-position: 0% 80%
+background-position: 0% 90%
 # `Makefile`
 
 ```Makefile
@@ -242,7 +263,7 @@ chopped_meat: raw_meat
 
 background-image: url(dots/detailed.png)
 background-size: contain
-background-position: 0% 80%
+background-position: 0% 90%
 
 # `Makefile` with placeholders
 
@@ -263,7 +284,7 @@ chopped_meat: raw_meat
 
 background-image: url(dots/detailed.png)
 background-size: contain
-background-position: 0% 80%
+background-position: 0% 90%
 
 # `Makefile` with ![](images/R_logo_45.png)?
 
@@ -346,7 +367,7 @@ background-size: contain
 background-position: 0% 90%
 
 <div id="htmlwidget-ec897849c5c50a6f7846" style="width:700px;height:450px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ec897849c5c50a6f7846">{"x":{"nodes":{"id":["combine","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"label":["combine","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"status":["imported","imported","imported","imported","outdated","outdated","outdated"],"type":["function","function","file","function","object","object","object"],"level":[0,0,0,0,1,2,3],"font.size":[20,20,20,20,20,20,20],"color":["#1874CD","#1874CD","#1874CD","#1874CD","#000000","#000000","#000000"],"shape":["triangle","triangle","square","triangle","dot","dot","dot"],"hover_label":["function (...) \n{\n    structure(\"ragout\", class = \"food\", input = list(...))\n}","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    structure(paste(\"fried\", main), class = \"food\", input = list(what, \n        ...))\n}","raw meat","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    structure(paste(\"chopped\", main), class = \"food\", input = list(what, \n        ...))\n}","chop(file_in(\"raw_meat.csv\"))","fry(chopped_meat, with = \"oil\")","combine(fried_meat, with = \"vegetables\")"],"x":[-1,-0.333333333333333,0.333333333333333,1,0.666666666666667,0.333333333333333,0.333333333333333],"y":[-1,-1,-1,-1,-0.333333333333333,0.333333333333333,1]},"edges":{"from":["combine","fried_meat","chopped_meat","fry","\"raw_meat.csv\"","chop"],"to":["ragout","ragout","fried_meat","fried_meat","chopped_meat","chopped_meat"],"arrows":["to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"navigationButtons":true,"hover":true}},"groups":null,"width":700,"height":450,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":{"text":"Workflow graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Imported","Object","Function","File"],"color":["#000000","#1874CD","#888888","#888888","#888888"],"shape":["dot","dot","dot","triangle","square"],"font.color":["black","black","black","black","black"],"font.size":[20,20,20,20,20],"id":[2,5,7,8,9]},"nodesToDataframe":true},"igraphlayout":{"type":"square"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","events":{"hoverNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }","blurNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }"}},"evals":["events.hoverNode","events.blurNode"],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-ec897849c5c50a6f7846">{"x":{"nodes":{"id":["combine","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"label":["combine","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"status":["imported","imported","imported","imported","outdated","outdated","outdated"],"type":["function","function","file","function","object","object","object"],"level":[0,0,0,0,1,2,3],"font.size":[20,20,20,20,20,20,20],"color":["#1874CD","#1874CD","#1874CD","#1874CD","#000000","#000000","#000000"],"shape":["triangle","triangle","square","triangle","dot","dot","dot"],"hover_label":["function (..., name = \"ragout\") \n{\n    new_food(name, list(...))\n}","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"fried\", main), input = list(what, ...), provenance = NULL)\n}","raw meat","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"chopped\", main), input = list(what, ...), \n        provenance = NULL)\n}","chop(file_in(\"raw_meat.csv\"))","fry(chopped_meat, with = \"oil\")","combine(fried_meat, with = \"vegetables\")"],"x":[-1,-0.333333333333333,0.333333333333333,1,0.666666666666667,0.333333333333333,0.333333333333333],"y":[-1,-1,-1,-1,-0.333333333333333,0.333333333333333,1]},"edges":{"from":["combine","fried_meat","chopped_meat","fry","\"raw_meat.csv\"","chop"],"to":["ragout","ragout","fried_meat","fried_meat","chopped_meat","chopped_meat"],"arrows":["to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"navigationButtons":true,"hover":true}},"groups":null,"width":700,"height":450,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":{"text":"Workflow graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Imported","Object","Function","File"],"color":["#000000","#1874CD","#888888","#888888","#888888"],"shape":["dot","dot","dot","triangle","square"],"font.color":["black","black","black","black","black"],"font.size":[20,20,20,20,20],"id":[2,5,7,8,9]},"nodesToDataframe":true},"igraphlayout":{"type":"square"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","events":{"hoverNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }","blurNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }"}},"evals":["events.hoverNode","events.blurNode"],"jsHooks":[]}</script>
 
 ---
 
@@ -363,7 +384,7 @@ make(plan)
 ```
 
 &lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;.../.drake&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;4&amp;nbsp;imports:&amp;nbsp;pre_chunk,&amp;nbsp;check_local_env,&amp;nbsp;colourise_chunk,...&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;3&amp;nbsp;imports:&amp;nbsp;pre_chunk,&amp;nbsp;colourise_chunk,&amp;nbsp;plan&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;3&amp;nbsp;targets:&amp;nbsp;ragout,&amp;nbsp;fried_meat,&amp;nbsp;chopped_meat&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;4&amp;nbsp;items:&amp;nbsp;file&amp;nbsp;"raw_meat.csv",&amp;nbsp;chop,&amp;nbsp;combine,&amp;nbsp;fry&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;chopped_meat&lt;/div&gt;
@@ -380,9 +401,9 @@ readd("ragout")
 ```
 
 &lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;.../.drake&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;ragout,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fried&amp;nbsp;meat,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;meat,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;ragout,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fried&amp;nbsp;meat,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;meat,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;raw&amp;nbsp;meat&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;oil&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;vegetables&lt;/div&gt;&lt;/code&gt;
@@ -391,7 +412,7 @@ readd("ragout")
 ---
 
 <div id="htmlwidget-ac00066e7f6365b7f0d3" style="width:700px;height:450px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ac00066e7f6365b7f0d3">{"x":{"nodes":{"id":["combine","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"label":["combine","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"status":["imported","imported","imported","imported","up to date","up to date","up to date"],"type":["function","function","file","function","object","object","object"],"level":[0,0,0,0,1,2,3],"font.size":[20,20,20,20,20,20,20],"color":["#1874CD","#1874CD","#1874CD","#1874CD","#228B22","#228B22","#228B22"],"shape":["triangle","triangle","square","triangle","dot","dot","dot"],"hover_label":["function (...) \n{\n    structure(\"ragout\", class = \"food\", input = list(...))\n}","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    structure(paste(\"fried\", main), class = \"food\", input = list(what, \n        ...))\n}","raw meat","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    structure(paste(\"chopped\", main), class = \"food\", input = list(what, \n        ...))\n}","chop(file_in(\"raw_meat.csv\"))","fry(chopped_meat, with = \"oil\")","combine(fried_meat, with = \"vegetables\")"],"x":[-1,-0.333333333333333,0.333333333333333,1,0.666666666666667,0.333333333333333,0.333333333333333],"y":[-1,-1,-1,-1,-0.333333333333333,0.333333333333333,1]},"edges":{"from":["combine","fried_meat","chopped_meat","fry","\"raw_meat.csv\"","chop"],"to":["ragout","ragout","fried_meat","fried_meat","chopped_meat","chopped_meat"],"arrows":["to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"navigationButtons":true,"hover":true}},"groups":null,"width":700,"height":450,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":{"text":"Workflow graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Imported","Object","Function","File"],"color":["#228B22","#1874CD","#888888","#888888","#888888"],"shape":["dot","dot","dot","triangle","square"],"font.color":["black","black","black","black","black"],"font.size":[20,20,20,20,20],"id":[1,5,7,8,9]},"nodesToDataframe":true},"igraphlayout":{"type":"square"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","events":{"hoverNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }","blurNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }"}},"evals":["events.hoverNode","events.blurNode"],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-ac00066e7f6365b7f0d3">{"x":{"nodes":{"id":["combine","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"label":["combine","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"status":["imported","imported","imported","imported","up to date","up to date","up to date"],"type":["function","function","file","function","object","object","object"],"level":[0,0,0,0,1,2,3],"font.size":[20,20,20,20,20,20,20],"color":["#1874CD","#1874CD","#1874CD","#1874CD","#228B22","#228B22","#228B22"],"shape":["triangle","triangle","square","triangle","dot","dot","dot"],"hover_label":["function (..., name = \"ragout\") \n{\n    new_food(name, list(...))\n}","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"fried\", main), input = list(what, ...), provenance = NULL)\n}","raw meat","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"chopped\", main), input = list(what, ...), \n        provenance = NULL)\n}","chop(file_in(\"raw_meat.csv\"))","fry(chopped_meat, with = \"oil\")","combine(fried_meat, with = \"vegetables\")"],"x":[-1,-0.333333333333333,0.333333333333333,1,0.666666666666667,0.333333333333333,0.333333333333333],"y":[-1,-1,-1,-1,-0.333333333333333,0.333333333333333,1]},"edges":{"from":["combine","fried_meat","chopped_meat","fry","\"raw_meat.csv\"","chop"],"to":["ragout","ragout","fried_meat","fried_meat","chopped_meat","chopped_meat"],"arrows":["to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"navigationButtons":true,"hover":true}},"groups":null,"width":700,"height":450,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":{"text":"Workflow graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Imported","Object","Function","File"],"color":["#228B22","#1874CD","#888888","#888888","#888888"],"shape":["dot","dot","dot","triangle","square"],"font.color":["black","black","black","black","black"],"font.size":[20,20,20,20,20],"id":[1,5,7,8,9]},"nodesToDataframe":true},"igraphlayout":{"type":"square"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","events":{"hoverNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }","blurNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }"}},"evals":["events.hoverNode","events.blurNode"],"jsHooks":[]}</script>
 
 ---
 
@@ -404,7 +425,7 @@ make(plan)
 ```
 
 &lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;.../.drake&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;4&amp;nbsp;imports:&amp;nbsp;pre_chunk,&amp;nbsp;check_local_env,&amp;nbsp;colourise_chunk,...&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;3&amp;nbsp;imports:&amp;nbsp;pre_chunk,&amp;nbsp;colourise_chunk,&amp;nbsp;plan&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;3&amp;nbsp;targets:&amp;nbsp;ragout,&amp;nbsp;fried_meat,&amp;nbsp;chopped_meat&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;4&amp;nbsp;items:&amp;nbsp;file&amp;nbsp;"raw_meat.csv",&amp;nbsp;chop,&amp;nbsp;combine,&amp;nbsp;fry&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;chopped_meat&lt;/div&gt;
@@ -434,7 +455,7 @@ plan &lt;- drake_plan(
 ---
 
 <div id="htmlwidget-a261f1c13aea9e511342" style="width:700px;height:450px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a261f1c13aea9e511342">{"x":{"nodes":{"id":["c","combine","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"label":["c","combine","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"status":["imported","imported","imported","imported","imported","up to date","outdated","outdated"],"type":["function","function","function","file","function","object","object","object"],"level":[0,0,0,0,0,1,2,3],"font.size":[20,20,20,20,20,20,20,20],"color":["#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#228B22","#000000","#000000"],"shape":["triangle","triangle","triangle","square","triangle","dot","dot","dot"],"hover_label":[".Primitive(\"c\")","function (...) \n{\n    structure(\"ragout\", class = \"food\", input = list(...))\n}","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    structure(paste(\"fried\", main), class = \"food\", input = list(what, \n        ...))\n}","raw meat","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    structure(paste(\"chopped\", main), class = \"food\", input = list(what, \n        ...))\n}","chop(file_in(\"raw_meat.csv\"))","fry(chopped_meat, with = c(\"oil\", \"pepper\"))","combine(fried_meat, with = \"vegetables\")"],"x":[-0.5,-1,0,0.5,1,0.75,0,0],"y":[-1,-1,-1,-1,-1,-0.333333333333333,0.333333333333333,1]},"edges":{"from":["c","combine","fried_meat","chopped_meat","fry","\"raw_meat.csv\"","chop"],"to":["fried_meat","ragout","ragout","fried_meat","fried_meat","chopped_meat","chopped_meat"],"arrows":["to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"navigationButtons":true,"hover":true}},"groups":null,"width":700,"height":450,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":{"text":"Workflow graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Outdated","Imported","Object","Function","File"],"color":["#228B22","#000000","#1874CD","#888888","#888888","#888888"],"shape":["dot","dot","dot","dot","triangle","square"],"font.color":["black","black","black","black","black","black"],"font.size":[20,20,20,20,20,20],"id":[1,2,5,7,8,9]},"nodesToDataframe":true},"igraphlayout":{"type":"square"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","events":{"hoverNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }","blurNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }"}},"evals":["events.hoverNode","events.blurNode"],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-a261f1c13aea9e511342">{"x":{"nodes":{"id":["combine","c","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"label":["combine","c","fry","\"raw_meat.csv\"","chop","chopped_meat","fried_meat","ragout"],"status":["imported","imported","imported","imported","imported","up to date","outdated","outdated"],"type":["function","function","function","file","function","object","object","object"],"level":[0,0,0,0,0,1,2,3],"font.size":[20,20,20,20,20,20,20,20],"color":["#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#228B22","#000000","#000000"],"shape":["triangle","triangle","triangle","square","triangle","dot","dot","dot"],"hover_label":["function (..., name = \"ragout\") \n{\n    new_food(name, list(...))\n}",".Primitive(\"c\")","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"fried\", main), input = list(what, ...), provenance = NULL)\n}","raw meat","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"chopped\", main), input = list(what, ...), \n        provenance = NULL)\n}","chop(file_in(\"raw_meat.csv\"))","fry(chopped_meat, with = c(\"oil\", \"pepper\"))","combine(fried_meat, with = \"vegetables\")"],"x":[-1,-0.5,0,0.5,1,0.75,0,0],"y":[-1,-1,-1,-1,-1,-0.333333333333333,0.333333333333333,1]},"edges":{"from":["combine","fried_meat","c","chopped_meat","fry","\"raw_meat.csv\"","chop"],"to":["ragout","ragout","fried_meat","fried_meat","fried_meat","chopped_meat","chopped_meat"],"arrows":["to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"navigationButtons":true,"hover":true}},"groups":null,"width":700,"height":450,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":{"text":"Workflow graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Outdated","Imported","Object","Function","File"],"color":["#228B22","#000000","#1874CD","#888888","#888888","#888888"],"shape":["dot","dot","dot","dot","triangle","square"],"font.color":["black","black","black","black","black","black"],"font.size":[20,20,20,20,20,20],"id":[1,2,5,7,8,9]},"nodesToDataframe":true},"igraphlayout":{"type":"square"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","events":{"hoverNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }","blurNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }"}},"evals":["events.hoverNode","events.blurNode"],"jsHooks":[]}</script>
 
 ---
 
@@ -445,7 +466,7 @@ make(plan)
 ```
 
 &lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;.../.drake&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;4&amp;nbsp;imports:&amp;nbsp;pre_chunk,&amp;nbsp;check_local_env,&amp;nbsp;colourise_chunk,...&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;3&amp;nbsp;imports:&amp;nbsp;pre_chunk,&amp;nbsp;colourise_chunk,&amp;nbsp;plan&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;3&amp;nbsp;targets:&amp;nbsp;ragout,&amp;nbsp;fried_meat,&amp;nbsp;chopped_meat&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;5&amp;nbsp;items:&amp;nbsp;file&amp;nbsp;"raw_meat.csv",&amp;nbsp;c,&amp;nbsp;chop,&amp;nbsp;combine,&amp;nbsp;fry&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;chopped_meat&lt;/div&gt;
@@ -462,9 +483,9 @@ readd("ragout")
 ```
 
 &lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;.../.drake&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;ragout,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fried&amp;nbsp;meat,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;meat,&amp;nbsp;made&amp;nbsp;of&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;ragout,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fried&amp;nbsp;meat,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;meat,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;raw&amp;nbsp;meat&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;oil&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;pepper&lt;/div&gt;
@@ -475,7 +496,7 @@ readd("ragout")
 
 class: inverse, center, middle
 
-# Running your analysis on other people's computers enables reproducible research.
+# Running your analysis on other people's computers enables reproducibility.
 
 # &amp;nbsp;
 
