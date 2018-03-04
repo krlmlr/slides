@@ -5,8 +5,9 @@ account: krlmlr
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 291660
-bundleId: 1249236
+bundleId: 1252139
 url: https://krlmlr.shinyapps.io/cooking-tutorial/
-when: 1520008193.18113
+when: 1520196096.46716
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: cooking-drake-tutorial.html|cooking-drake-tutorial.Rmd
