@@ -1,0 +1,12 @@
+name: cooking-tutorial
+title: cooking-tutorial
+username:
+account: krlmlr
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 291660
+bundleId: 1249236
+url: https://krlmlr.shinyapps.io/cooking-tutorial/
+when: 1520008193.18113
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,5 +1,5 @@
 ---
-title: "Cooking exercises"
+title: "Exercise: Cooking"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -11,10 +11,22 @@ knitr::opts_chunk$set(echo = FALSE)
 library(cooking)
 ```
 
+## Introduction
+
+These exercises introduce the *cooking* toy package. In many cases a part of the code is given, and your task is to replace the dots `...` with something meaningful before you can run the code. All exercises are self-contained.
+
+You will only receive feedback to questions, there's no automatic validation for the R code.
+
+The *cooking* package is loaded for all exercises:
+
+```r
+library(cooking)
+```
+
 
 ## Buy meat
 
-Use the `buy()` function to buy meat. Fill in the dots. (The *cooking* package is already loaded.)
+Use the `buy()` function to buy meat.
 
 ```{r buy, exercise=TRUE}
 buy("...")

@@ -390,6 +390,12 @@ Version: 2.0.3
 Hash: e21f3443652b70266734ad10aa5861f4
 Requires: htmltools, htmlwidgets, jsonlite, magrittr
 
+Package: wildcard
+Source: CRAN
+Version: 1.1.0
+Hash: 6826e9c123d56f7a593c1be6b26fb4f5
+Requires: magrittr, stringi
+
 Package: withr
 Source: CRAN
 Version: 2.1.1

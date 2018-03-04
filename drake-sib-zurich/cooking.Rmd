@@ -54,6 +54,8 @@ knitr::knit_hooks$set(
   warning = colourise_chunk("warning"),
   error = colourise_chunk("error")
 )
+
+pkgconfig::set_config_in("drake::strings_in_dots" = "literals", .in = globalenv())
 ```
 
 # The *cooking* package
@@ -94,19 +96,6 @@ peel(buy("carrots"))
 
 ---
 
-# The pipe
-
-```{r pipe}
-"carrots" %>%
-  buy() %>%
-  peel() %>%
-  chop() %>%
-  fry(with = c("oil", "garlic", "chopped meat")) %>%
-  combine("mashed potatoes")
-```
-
----
-
 # New methods
 
 ```{r make}
@@ -127,3 +116,115 @@ background-position: 0% 90%
 3. Fry the chopped meat with oil
 4. Combine the fried meat with vegetables
 5. Add a salad
+
+---
+
+# The *drake* package
+
+https://ropensci.github.io/drake
+
+```{r api-drake, eval = FALSE}
+# Create plan
+`drake_plan()`
+
+# Execute plan
+`make()`
+
+# Read single target
+`readd()`
+
+# From plan to configuration
+`drake_config()`
+
+# Visualize
+`vis_drake_graph()`
+
+# What do we need to run?
+`outdated()`
+```
+
+---
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+```{r drake-drake-plan}
+library(drake)
+plan <- drake_plan( #<<
+  meat = buy("meat"),
+  chopped_meat = chop(meat),
+  fried_meat = fry(meat, with = "oil"),
+  ragout = combine(fried_meat, with = "vegetables")
+)
+plan
+```
+
+---
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+```{r cleanup, include=FALSE}
+unlink(".drake", recursive = TRUE)
+```
+
+```{r drake-make}
+make(plan) #<<
+```
+
+---
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+```{r drake-readd}
+readd("ragout") #<<
+```
+
+---
+```{r drake-vis-drake-graph}
+config <- drake_config(plan, verbose = FALSE) #<<
+vis_drake_graph(config) #<<
+```
+
+---
+```{r drake-outdated}
+config <- drake_config(plan, verbose = FALSE)
+outdated(config) #<<
+```
+
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+# Exercises
+
+1. Plan to buy meat with `buy()`
+2. Plan to chop and fry the meat
+3. Fry with garlic instead
+4. Buy at the butcher's instead
+5. Prepare vegetables
+6. Combine the ragout
+7. A vegetarian option?
+
+---
+
+---
+
+---
+
+# The pipe
+
+```{r pipe}
+"carrots" %>%
+  buy() %>%
+  peel() %>%
+  chop() %>%
+  fry(with = c("oil", "garlic", "chopped meat")) %>%
+  combine("mashed potatoes")
+```
+
+---
+

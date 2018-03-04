@@ -6,6 +6,10 @@
     <meta name="author" content="Kirill Müller" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <link href="libs/vis/vis.css" rel="stylesheet" />
+    <script src="libs/vis/vis.min.js"></script>
+    <script src="libs/visNetwork-binding/visNetwork.js"></script>
   </head>
   <body>
     <textarea id="source">
@@ -85,33 +89,6 @@ peel(buy("carrots"))
 
 ---
 
-# The pipe
-
-
-
-```r
-"carrots" %&gt;%
-  buy() %&gt;%
-  peel() %&gt;%
-  chop() %&gt;%
-  fry(with = c("oil", "garlic", "chopped meat")) %&gt;%
-  combine("mashed potatoes")
-```
-
-&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;ragout,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fried&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;peeled&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;raw&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;bought&amp;nbsp;at&lt;/span&gt;&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;supermarket&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;oil&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;garlic&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;meat&lt;/div&gt;
-&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;mashed&amp;nbsp;potatoes&lt;/div&gt;&lt;/code&gt;
-
-
----
-
 # New methods
 
 
@@ -138,6 +115,183 @@ background-position: 0% 90%
 3. Fry the chopped meat with oil
 4. Combine the fried meat with vegetables
 5. Add a salad
+
+---
+
+# The *drake* package
+
+https://ropensci.github.io/drake
+
+
+
+```r
+# Create plan
+`drake_plan()`
+
+# Execute plan
+`make()`
+
+# Read single target
+`readd()`
+
+# From plan to configuration
+`drake_config()`
+
+# Visualize
+`vis_drake_graph()`
+
+# What do we need to run?
+`outdated()`
+```
+
+
+
+---
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+
+
+```r
+library(drake)
+*plan &lt;- drake_plan(
+  meat = buy("meat"),
+  chopped_meat = chop(meat),
+  fried_meat = fry(meat, with = "oil"),
+  ragout = combine(fried_meat, with = "vegetables")
+)
+plan
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;#&amp;nbsp;A&amp;nbsp;tibble:&amp;nbsp;4&amp;nbsp;x&amp;nbsp;2&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;target&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;command&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="font-style:italic"&gt;&lt;span style="color:#8a8a8a"&gt;&amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="font-style:italic"&gt;&lt;span style="color:#8a8a8a"&gt;&amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;1&lt;/span&gt;&amp;nbsp;meat&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;buy(\"meat\")&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;2&lt;/span&gt;&amp;nbsp;chopped_meat&amp;nbsp;chop(meat)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;3&lt;/span&gt;&amp;nbsp;fried_meat&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;fry(meat,&amp;nbsp;with&amp;nbsp;=&amp;nbsp;\"oil\")&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;4&lt;/span&gt;&amp;nbsp;ragout&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;combine(fried_meat,&amp;nbsp;with&amp;nbsp;=&amp;nbsp;\"vegetables\")&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;
+
+
+---
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+
+
+
+
+```r
+*make(plan)
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;.../.drake&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;Unloading&amp;nbsp;targets&amp;nbsp;from&amp;nbsp;environment:&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;4&amp;nbsp;imports:&amp;nbsp;pre_chunk,&amp;nbsp;dice,&amp;nbsp;colourise_chunk,&amp;nbsp;plan&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;connect&lt;/span&gt;&amp;nbsp;4&amp;nbsp;targets:&amp;nbsp;meat,&amp;nbsp;chopped_meat,&amp;nbsp;fried_meat,&amp;nbsp;ragout&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;4&amp;nbsp;items:&amp;nbsp;buy,&amp;nbsp;chop,&amp;nbsp;combine,&amp;nbsp;fry&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#00afff"&gt;target&lt;/span&gt;&amp;nbsp;meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;2&amp;nbsp;items:&amp;nbsp;chopped_meat,&amp;nbsp;fried_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#00afff"&gt;target&lt;/span&gt;&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#00afff"&gt;target&lt;/span&gt;&amp;nbsp;fried_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;check&lt;/span&gt;&amp;nbsp;1&amp;nbsp;item:&amp;nbsp;ragout&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#ff5fff"&gt;unload&lt;/span&gt;&amp;nbsp;2&amp;nbsp;items:&amp;nbsp;meat,&amp;nbsp;chopped_meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#00afff"&gt;target&lt;/span&gt;&amp;nbsp;ragout&lt;/div&gt;&lt;/code&gt;
+
+
+---
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+
+
+```r
+*readd("ragout")
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;.../.drake&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;ragout,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fried&amp;nbsp;meat,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;raw&amp;nbsp;meat,&amp;nbsp;&lt;span style="font-style:italic"&gt;bought&amp;nbsp;at&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;supermarket&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;oil&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;vegetables&lt;/div&gt;&lt;/code&gt;
+
+
+---
+
+
+```r
+*config &lt;- drake_config(plan, verbose = FALSE)
+*vis_drake_graph(config)
+```
+
+<div id="htmlwidget-ec897849c5c50a6f7846" style="width:504px;height:504px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ec897849c5c50a6f7846">{"x":{"nodes":{"id":["buy","chop","fry","combine","meat","fried_meat","chopped_meat","ragout"],"label":["buy\n0.002s","chop\n0.001s","fry\n0.001s","combine\n0.001s","meat\n0.08s","fried_meat\n0.01s","chopped_meat\n0.052s","ragout\n0.014s"],"status":["imported","imported","imported","imported","up to date","up to date","up to date","up to date"],"type":["function","function","function","function","object","object","object","object"],"level":[0,0,0,0,1,2,2,3],"font.size":[20,20,20,20,20,20,20,20],"color":["#1874CD","#1874CD","#1874CD","#1874CD","#228B22","#228B22","#228B22","#228B22"],"shape":["triangle","triangle","triangle","triangle","dot","dot","dot","dot"],"hover_label":["function (what, from = supermarket()) \n{\n    new_food(paste(\"raw\", what), input = from, provenance = \"bought at\")\n}","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"chopped\", main), input = list(what, ...), \n        provenance = NULL)\n}","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"fried\", main), input = list(what, ...), provenance = NULL)\n}","function (..., name = \"ragout\") \n{\n    new_food(name, list(...))\n}","buy(\"meat\")","fry(meat, with = \"oil\")","chop(meat)","combine(fried_meat, with = \"vegetables\")"],"x":[-0.333333333333333,1,-1,0.333333333333333,-0.333333333333333,-0.666666666666667,1,-0.333333333333333],"y":[-1,-1,-1,-1,-0.333333333333333,0.333333333333333,0.333333333333333,1]},"edges":{"from":["buy","chop","meat","meat","fry","combine","fried_meat"],"to":["meat","chopped_meat","fried_meat","chopped_meat","fried_meat","ragout","ragout"],"arrows":["to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"navigationButtons":true,"hover":true}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":{"text":"Workflow graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Outdated","In progress","Failed","Imported","Missing","Object","Function","File"],"color":["#228B22","#000000","#FF7221","#AA0000","#1874CD","#9A32CD","#888888","#888888","#888888"],"shape":["dot","dot","dot","dot","dot","dot","dot","triangle","square"],"font.color":["black","black","black","black","black","black","black","black","black"],"font.size":[20,20,20,20,20,20,20,20,20],"id":[1,2,3,4,5,6,7,8,9]},"nodesToDataframe":true},"igraphlayout":{"type":"square"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","events":{"hoverNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }","blurNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }"}},"evals":["events.hoverNode","events.blurNode"],"jsHooks":[]}</script>
+
+---
+
+
+```r
+config &lt;- drake_config(plan, verbose = FALSE)
+*outdated(config)
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;character(0)&lt;/div&gt;&lt;/code&gt;
+
+
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+# Exercises
+
+1. Plan to buy meat with `buy()`
+2. Plan to chop and fry the meat
+3. Fry with garlic instead
+4. Buy at the butcher's instead
+5. Prepare vegetables
+6. Combine the ragout
+7. A vegetarian option?
+
+---
+
+---
+
+---
+
+# The pipe
+
+
+
+```r
+"carrots" %&gt;%
+  buy() %&gt;%
+  peel() %&gt;%
+  chop() %&gt;%
+  fry(with = c("oil", "garlic", "chopped meat")) %&gt;%
+  combine("mashed potatoes")
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;ragout,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fried&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;peeled&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;made&amp;nbsp;of&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;raw&amp;nbsp;carrots,&amp;nbsp;&lt;span style="font-style:italic"&gt;bought&amp;nbsp;at&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;supermarket&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;oil&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;garlic&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;chopped&amp;nbsp;meat&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;mashed&amp;nbsp;potatoes&lt;/div&gt;&lt;/code&gt;
+
+
+---
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
