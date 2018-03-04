@@ -195,7 +195,7 @@ outdated(config) #<<
 
 ---
 
-background-image: url(dots/detailed.png)
+background-image: url(dots/full.png)
 background-size: contain
 background-position: 0% 90%
 
@@ -207,7 +207,7 @@ background-position: 0% 90%
 4. Buy at the butcher's instead
 5. Prepare vegetables
 6. Combine the ragout
-7. A vegetarian option?
+7. Add a vegetarian option
 
 ---
 

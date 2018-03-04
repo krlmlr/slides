@@ -439,3 +439,149 @@ question(
          message = "No, `make()` will remove the `meat` object we created.")
 )
 ```
+
+## Prepare vegetables
+
+We don't assume any plans for the exercises in this topic.
+
+Create a plan solely to prepare carrots: Buy them and `peel()` them. Run the plan.
+
+```{r drake-vegetables-carrots, exercise=TRUE}
+plan_carrots <- drake_plan(
+  carrots = ...,
+  peeled_carrots = ...
+)
+
+...
+```
+
+```{r drake-vegetables-carrots-solution}
+plan_carrots <- drake_plan(
+  carrots = buy("carrots"),
+  peeled_carrots = peel(carrots)
+)
+
+make(plan_carrots)
+```
+
+Create another plan solely to prepare potatoes: Buy them, peel them, and then `cook()` them. Implement a function `prepare_potatoes()` to both peel and cook the potatoes.
+
+```{r drake-vegetables-potatoes, exercise=TRUE}
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- ...(peeled_potatoes)
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  ...,
+  cooked_potatoes = ...
+)
+
+...
+```
+
+```{r drake-vegetables-potatoes-solution}
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes)
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  potatoes = buy("potatoes"),
+  cooked_potatoes = prepare_potatoes(potatoes)
+)
+
+make(plan_potatoes)
+```
+
+
+```{r drake-vegetables-potatoes-solution-all}
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes)
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  potatoes = buy("potatoes"),
+  cooked_potatoes = prepare_potatoes(potatoes)
+)
+
+make(plan_potatoes, verbose = FALSE)
+```
+
+We forgot to add salt when cooking the potatoes. Add `with = "salt"` to the `cook()` call in the `prepare_potatoes()` function. Does this invalidate the `cooked_potatoes` target? What happens if you call `make()`? Show the value of the `cooked_potatoes` target.
+
+```{r drake-vegetables-salt, exercise=TRUE, exercise.setup = "drake-vegetables-potatoes-solution-all"}
+prepare_potatoes <- ...
+
+message("*** Showing outdated targets")
+config <- drake_config(verbose = FALSE)
+outdated(...)
+
+message("*** Updating targets")
+make()
+
+message("*** Displaying target")
+...
+```
+
+```{r drake-vegetables-salt-solution}
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes, with = "salt")
+  cooked_potatoes
+}
+
+message("*** Showing outdated targets")
+config <- drake_config(verbose = FALSE)
+outdated(config)
+
+message("*** Updating targets")
+make()
+
+message("*** Displaying target")
+readd("cooked_potatoes")
+```
+
+
+```{r drake-vegetables-salt-solution-all}
+prepare_potatoes <- function(potatoes) {
+  peeled_potatoes <- peel(potatoes)
+  cooked_potatoes <- cook(peeled_potatoes, with = "salt")
+  cooked_potatoes
+}
+
+plan_potatoes <- drake_plan(
+  potatoes = buy("potatoes"),
+  cooked_potatoes = prepare_potatoes(potatoes)
+)
+
+make(plan_potatoes, verbose = FALSE)
+```
+
+Verify the visualization to see why the `cooked_potatoes` target is updated when we change the definition of `prepared_potatoes()`.
+
+```{r drake-vegetables-salt-vis, exercise=TRUE, exercise.setup = "drake-vegetables-salt-solution-all"}
+vis_drake_graph(drake_config())
+```
+
+```{r drake-vegetables-functions-quiz}
+question(
+  "Why does `make()` update the `cooked_potatoes` target?",
+  
+  answer("Because we changed the text of the command used to create this target.",
+         message = "We didn't in fact change the text of the command."),
+  
+  answer("Because we changed a function used by the command that creates this target.",
+         correct = TRUE),
+  
+  answer("Because `make()` always rebuilds all targets.",
+         message = "`make()` will only update the outdated targets."),
+  
+  answer("Because `make()` always rebuilds all targets if the command calls functions defined by the user.",
+         message = "`make()` will only update the outdated targets. It will even analyze the functions defined by the user, as well as any other functions it uses.")
+)
+```
