@@ -9,6 +9,7 @@ Cheat sheet!
     - written a function in R
     - used the pipe in R
     - created a reproducible analysis with R
+    - used GitHub?
     - compiled code
     - run Make
     - run remake
@@ -16,6 +17,9 @@ Cheat sheet!
     - brought an R project to work on?
 - goals for today, talk to neighbors
 - walkthrough material
+    - GitHub account?
+    - Register and watch repository
+    - README outline
 
 # 9:20
 
