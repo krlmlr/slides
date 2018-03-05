@@ -513,15 +513,222 @@ class: inverse, center, middle
 
 ---
 
-class: inverse
+class: center, middle, inverse, title-slide
+
+# Make-like declarative workflows with &lt;img src="images/R_logo_45.png" /&gt;
+## Advanced topics
+### Kirill Müller
+### Zurich, 2018-03-05
+
+---
+
+# Project directory
+
+
+
+```r
+library(here)
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;here()&amp;nbsp;starts&amp;nbsp;at&amp;nbsp;...&lt;/div&gt;&lt;/code&gt;
+
+
+```r
+dir(here())
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;[1]&amp;nbsp;"cooking-tutorial"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"cooking.Rmd"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;[3]&amp;nbsp;"docs"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"dots"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;[5]&amp;nbsp;"gsp"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"images"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;[7]&amp;nbsp;"index_cache"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"index.Rmd"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;[9]&amp;nbsp;"Makefile"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"notes.md"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;[11]&amp;nbsp;"outline.md"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"packrat"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;[13]&amp;nbsp;"raw_meat.csv"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"remake-slides.Rproj"&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;[15]&amp;nbsp;"remake.yml"&lt;/div&gt;&lt;/code&gt;
+
+
+```r
+here("docs", "index.html")
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;[1]&amp;nbsp;".../docs/index.html"&lt;/div&gt;&lt;/code&gt;
+
+
+---
+
+# Project directory
+
+
+
+```r
+dr_here()
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;here()&amp;nbsp;starts&amp;nbsp;at&amp;nbsp;...,&amp;nbsp;because&amp;nbsp;it&amp;nbsp;contains&amp;nbsp;a&amp;nbsp;file&amp;nbsp;matching&amp;nbsp;`[.]Rproj$`&amp;nbsp;with&amp;nbsp;contents&amp;nbsp;matching&amp;nbsp;`^Version:&amp;nbsp;`&amp;nbsp;in&amp;nbsp;the&amp;nbsp;first&amp;nbsp;line&lt;/div&gt;&lt;/code&gt;
+
+
+## Files outside project directory? Use links!
+
+- URLs
+- Windows: `Sys.junction()`
+- OS X / Linux: `file.link()`
+- `fs::link_create()`
+
+---
+
+# File organization
+
+
+
+```r
+*drake_example("gsp")
+cat(
+  system(
+*   "tree gsp",
+    intern = TRUE),
+  sep = "\n"
+)
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;gsp&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;├──&amp;nbsp;clean.R&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;├──&amp;nbsp;interactive-tutorial.R&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;├──&amp;nbsp;make.R&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;├──&amp;nbsp;R&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;│  &amp;nbsp;├──&amp;nbsp;functions.R&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;│  &amp;nbsp;├──&amp;nbsp;packages.R&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;│  &amp;nbsp;└──&amp;nbsp;plan.R&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;├──&amp;nbsp;README.md&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;└──&amp;nbsp;report.Rmd&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;1&amp;nbsp;directory,&amp;nbsp;8&amp;nbsp;files&lt;/div&gt;&lt;/code&gt;
+
+
+---
+
+background-image: url(images/conflicting.png)
+background-position: 50% 50%
+background-size: contain
+
+# Scalability?
+
+---
+
+# Parallel processing
+
+
+
+```r
+unlink(".drake", recursive = TRUE)
+plan &lt;- drake_plan(
+  sleep_1 = Sys.sleep(1),
+  sleep_2 = Sys.sleep(2),
+  sleep_3 = Sys.sleep(3),
+  sleep = list(sleep_1, sleep_2, sleep_3)
+)
+
+system.time(make(
+  plan, verbose = FALSE
+))
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;user&amp;nbsp;&amp;nbsp;system&amp;nbsp;elapsed&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;0.163&amp;nbsp;&amp;nbsp;&amp;nbsp;0.047&amp;nbsp;&amp;nbsp;&amp;nbsp;6.216&lt;/div&gt;&lt;/code&gt;
+
+
+---
+
+# Parallel processing
+
+
+
+```r
+unlink(".drake", recursive = TRUE)
+plan &lt;- drake_plan(
+  sleep_1 = Sys.sleep(1),
+  sleep_2 = Sys.sleep(2),
+  sleep_3 = Sys.sleep(3),
+  sleep = list(sleep_1, sleep_2, sleep_3)
+)
+
+system.time(make(
+  plan, verbose = FALSE,
+* jobs = 4
+))
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;user&amp;nbsp;&amp;nbsp;system&amp;nbsp;elapsed&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;0.335&amp;nbsp;&amp;nbsp;&amp;nbsp;0.458&amp;nbsp;&amp;nbsp;&amp;nbsp;3.416&lt;/div&gt;&lt;/code&gt;
+
+
+---
+
+background-image: url(dots/detailed-validate.png)
+background-position: 50% 90%
+background-size: contain
+
+# Validation
+
+- Directly at the source
+- Usually can be run in parallel to further processing
 
 ---
 
 background-image: url(dots/detailed-parallel.png)
+background-position: 50% 90%
 background-size: contain
-class: center, bottom
 
-# Same recipe, different inputs
+# Meta-rules
+
+- `evaluate_plan()` et al.
+- tidy evaluation: `!!`
+- *dplyr* manipulation
+- *data.table* manipulation
+- base R manipulation
+
+## Goal: Specify meta-rules in `drake_plan()`
+
+---
+
+# Dynamic plans
+
+
+
+```r
+plan &lt;-
+  fs::dir_ls(type = "file") %&gt;%
+  tibble::enframe() %&gt;%
+  dplyr::transmute(
+    target = paste0("hash_", value),
+    command = paste0("digest::digest(file_in('", value, "'))")
+  )
+
+plan
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;#&amp;nbsp;A&amp;nbsp;tibble:&amp;nbsp;8&amp;nbsp;x&amp;nbsp;2&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;target&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;command&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="font-style:italic"&gt;&lt;span style="color:#8a8a8a"&gt;&amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="font-style:italic"&gt;&lt;span style="color:#8a8a8a"&gt;&amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;1&lt;/span&gt;&amp;nbsp;hash_Makefile&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;digest::digest(file_in('Makefile'))&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;2&lt;/span&gt;&amp;nbsp;hash_cooking.Rmd&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;digest::digest(file_in('cooking.Rmd'))&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;3&lt;/span&gt;&amp;nbsp;hash_index.Rmd&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;digest::digest(file_in('index.Rmd'))&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;4&lt;/span&gt;&amp;nbsp;hash_notes.md&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;digest::digest(file_in('notes.md'))&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;5&lt;/span&gt;&amp;nbsp;hash_outline.md&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;digest::digest(file_in('outline.md'))&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;6&lt;/span&gt;&amp;nbsp;hash_raw_meat.csv&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;digest::digest(file_in('raw_meat.csv'…&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;7&lt;/span&gt;&amp;nbsp;hash_remake-slides.Rproj&amp;nbsp;digest::digest(file_in('remake-slides…&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;8&lt;/span&gt;&amp;nbsp;hash_remake.yml&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;digest::digest(file_in('remake.yml'))&lt;/div&gt;&lt;/code&gt;
+
+
+---
+
+# Dynamic plans
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;Warning&amp;nbsp;in&amp;nbsp;repair_target_names(plan$target):&amp;nbsp;replacing&amp;nbsp;illegal&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;symbols&amp;nbsp;in&amp;nbsp;target&amp;nbsp;names&amp;nbsp;with&amp;nbsp;'_'.&lt;/div&gt;&lt;/code&gt;
+<div id="htmlwidget-e2045036e7a6211c2d88" style="width:700px;height:450px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e2045036e7a6211c2d88">{"x":{"nodes":{"id":["\"Makefile\"","digest::digest","\"cooking.Rmd\"","\"index.Rmd\"","\"notes.md\"","\"outline.md\"","\"raw_meat.csv\"","\"remake-slides.Rproj\"","\"remake.yml\"","hash_Makefile","hash_cooking.Rmd","hash_index.Rmd","hash_notes.md","hash_outline.md","hash_raw_meat.csv","hash_remake_slides.Rproj","hash_remake.yml"],"label":["\"Makefile\"","digest::digest","\"cooking.Rmd\"","\"index.Rmd\"","\"notes.md\"","\"outline.md\"","\"raw_meat.csv\"","\"remake-slides.Rproj\"","\"remake.yml\"","hash_Makefile","hash_cooking.Rmd","hash_index.Rmd","hash_notes.md","hash_outline.md","hash_raw_meat.csv","hash_remake_slides.Rproj","hash_remake.yml"],"status":["imported","imported","imported","imported","imported","imported","imported","imported","imported","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated"],"type":["file","function","file","file","file","file","file","file","file","object","object","object","object","object","object","object","object"],"level":[0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1],"font.size":[20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20],"color":["#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#000000","#000000","#000000","#000000","#000000","#000000","#000000","#000000"],"shape":["square","triangle","square","square","square","square","square","square","square","dot","dot","dot","dot","dot","dot","dot","dot"],"hover_label":["all: docs/index.html docs/cooking.html\n\n.dots: $(patsubst %.dot,%.png,$(wildcard dots/*.dot))\n\ttouch $@\n\ndots/%.png: docs/dots/%.png\n\tln -sf $(PWD)/$< $@\n\ndocs/dots/%.png: dots/%.dot\n\tdot $< -Tpng -o$@","function (object, algo = c(\"md5\", \"sha1\", \"crc32\", \"sha256\", \n    \"sha512\", \"xxhash32\", \"xxhash64\", \"murmur32\"), serialize = TRUE, \n    file = FALSE, length = Inf, skip = \"auto\", ascii = FALSE, \n    raw = FALSE, seed = 0, errormode = c(\"stop\", \"wa...","---\ntitle: \"Make-like declarative workflows with ![](images/R_logo_45.png)\"\nsubtitle: \"Exercises\"\nauthor: \"Kirill Müller\"\ndate: \"Zurich, 2018-03-05\"\noutput:\n  xaringan::moon_reader:\n    lib_dir: docs/libs\n    nature:\n      highlightStyle: github","---\ntitle: \"Make-like declarative workflows with ![](images/R_logo_45.png)\"\nauthor: \"Kirill Müller\"\ndate: \"Zurich, 2018-03-05\"\noutput:\n  xaringan::moon_reader:\n    lib_dir: docs/libs\n    nature:\n      highlightStyle: github\n      highlightLines: true","## 2\n\nI'd like to start with definitions.  What is a \"reproducible workflow\"?\nIn the context of research, we must differentiate between \"reproducible\" and \"replicable\".\n\n- **Reproducible**: Can obtain same results from same data\n- Replicable: Repe...","# 9:00\n\n- hi, welcome\n- check software installation\n- quick survey\n    - used R\n    - written a function in R\n    - used the pipe in R\n    - created a reproducible analysis with R\n    - used GitHub?","raw meat","Version: 1.0\n\nRestoreWorkspace: Default\nSaveWorkspace: Default\nAlwaysSaveHistory: Default\n\nEnableCodeIndexing: Yes\nUseSpacesForTab: Yes\nNumSpacesForTab: 2\nEncoding: UTF-8","packages:\n- cooking\n\ntargets:\n  all:\n    depends: ragout\n\n  ragout:\n    command: combine(fried_meat, with = I(\"vegetables\"))\n","digest::digest(file_in('Makefile'))","digest::digest(file_in('cooking.Rmd'))","digest::digest(file_in('index.Rmd'))","digest::digest(file_in('notes.md'))","digest::digest(file_in('outline.md'))","digest::digest(file_in('raw_meat.csv'))","digest::digest(file_in('remake-slides.Rproj'))","digest::digest(file_in('remake.yml'))"],"x":[-1,0,-0.75,-0.5,-0.25,0.25,0.5,0.75,1,-1,-0.75,-0.5,-0.125,0.125,0.5,0.75,1],"y":[-1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1]},"edges":{"from":["\"Makefile\"","digest::digest","digest::digest","digest::digest","digest::digest","digest::digest","digest::digest","digest::digest","digest::digest","\"cooking.Rmd\"","\"index.Rmd\"","\"notes.md\"","\"outline.md\"","\"raw_meat.csv\"","\"remake-slides.Rproj\"","\"remake.yml\""],"to":["hash_Makefile","hash_Makefile","hash_cooking.Rmd","hash_index.Rmd","hash_notes.md","hash_outline.md","hash_raw_meat.csv","hash_remake_slides.Rproj","hash_remake.yml","hash_cooking.Rmd","hash_index.Rmd","hash_notes.md","hash_outline.md","hash_raw_meat.csv","hash_remake_slides.Rproj","hash_remake.yml"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"navigationButtons":true,"hover":true}},"groups":null,"width":700,"height":450,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":{"text":"Workflow graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Imported","Object","Function","File"],"color":["#000000","#1874CD","#888888","#888888","#888888"],"shape":["dot","dot","dot","triangle","square"],"font.color":["black","black","black","black","black"],"font.size":[20,20,20,20,20],"id":[2,5,7,8,9]},"nodesToDataframe":true},"igraphlayout":{"type":"square"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","events":{"hoverNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }","blurNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }"}},"evals":["events.hoverNode","events.blurNode"],"jsHooks":[]}</script>
+
+---
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

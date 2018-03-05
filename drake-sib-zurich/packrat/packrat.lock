@@ -7,6 +7,11 @@ Repos: BioCsoft=https://bioconductor.org/packages/3.5/bioc,
     BioCextra=https://bioconductor.org/packages/3.5/extra,
     CRAN=file:///opt/cran
 
+Package: BH
+Source: CRAN
+Version: 1.66.0-1
+Hash: 4cc8883584b955ed01f38f68bc03af6d
+
 Package: CodeDepends
 Source: CRAN
 Version: 0.5-3
@@ -92,6 +97,12 @@ Source: CRAN
 Version: 0.1
 Hash: e3a02070cf705d3ad1c5af1635a515a3
 
+Package: bindrcpp
+Source: CRAN
+Version: 0.2
+Hash: 2d69ff431a54f6c4a750754b88c7e0af
+Requires: Rcpp, bindr, plogr
+
 Package: bitops
 Source: CRAN
 Version: 1.0-6
@@ -129,6 +140,13 @@ Source: CRAN
 Version: 0.6.15
 Hash: 1f202ebd812ac7192be3739245746a13
 
+Package: dplyr
+Source: CRAN
+Version: 0.7.4
+Hash: c15022862b3eb28a528656b4b3b84e89
+Requires: BH, R6, Rcpp, assertthat, bindrcpp, glue, magrittr,
+    pkgconfig, plogr, rlang, tibble
+
 Package: drake
 Source: github
 Version: 5.0.1.9002
@@ -153,6 +171,12 @@ Source: CRAN
 Version: 1.5
 Hash: 258cf79a8dbeedf1c981cdb53837d2af
 
+Package: fs
+Source: CRAN
+Version: 1.1.0
+Hash: 037d21d4569bf34af62ef1bcb9581db9
+Requires: Rcpp
+
 Package: future
 Source: CRAN
 Version: 1.7.0
@@ -174,6 +198,12 @@ Package: glue
 Source: CRAN
 Version: 1.2.0
 Hash: 381e42baedecc633c0e547a0c7ca9de7
+
+Package: here
+Source: CRAN
+Version: 0.1
+Hash: 90e1a97508a0d7383b0eeb11e397e763
+Requires: rprojroot
 
 Package: highr
 Source: CRAN
@@ -269,6 +299,11 @@ Package: pkgconfig
 Source: CRAN
 Version: 2.0.1
 Hash: 0dda4a2654a22b36a715c2b0b6fbacac
+
+Package: plogr
+Source: CRAN
+Version: 0.1-1
+Hash: fb19215402e2d9f1c7f803dcaa806fc2
 
 Package: plyr
 Source: CRAN

@@ -7,3 +7,5 @@
 /.remake
 /.drake
 packrat/lib*/
+gsp
+/index_cache

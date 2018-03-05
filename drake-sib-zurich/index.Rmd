@@ -484,12 +484,153 @@ class: inverse, center, middle
 
 ---
 
-class: inverse
+class: center, middle, inverse, title-slide
+
+# Make-like declarative workflows with <img src="images/R_logo_45.png" />
+## Advanced topics
+### Kirill Müller
+### Zurich, 2018-03-05
+
+---
+
+# Project directory
+
+```{r here}
+library(here)
+dir(here())
+here("docs", "index.html")
+```
+
+---
+
+# Project directory
+
+```{r dr-here}
+dr_here()
+```
+
+## Files outside project directory? Use links!
+
+- URLs
+- Windows: `Sys.junction()`
+- OS X / Linux: `file.link()`
+- `fs::link_create()`
+
+---
+
+# File organization
+
+```{r drake-example-gsp}
+drake_example("gsp") #<<
+cat(
+  system(
+    "tree gsp", #<<
+    intern = TRUE),
+  sep = "\n"
+)
+```
+
+---
+
+background-image: url(images/conflicting.png)
+background-position: 50% 50%
+background-size: contain
+
+# Scalability?
+
+---
+
+# Parallel processing
+
+```{r drake-parallel-serial, cache=TRUE}
+unlink(".drake", recursive = TRUE)
+plan <- drake_plan(
+  sleep_1 = Sys.sleep(1),
+  sleep_2 = Sys.sleep(2),
+  sleep_3 = Sys.sleep(3),
+  sleep = list(sleep_1, sleep_2, sleep_3)
+)
+
+system.time(make(
+  plan, verbose = FALSE
+))
+```
+
+---
+
+# Parallel processing
+
+```{r drake-parallel-parallel, cache=TRUE}
+unlink(".drake", recursive = TRUE)
+plan <- drake_plan(
+  sleep_1 = Sys.sleep(1),
+  sleep_2 = Sys.sleep(2),
+  sleep_3 = Sys.sleep(3),
+  sleep = list(sleep_1, sleep_2, sleep_3)
+)
+
+system.time(make(
+  plan, verbose = FALSE,
+  jobs = 4  #<<
+))
+```
+
+---
+
+background-image: url(dots/detailed-validate.png)
+background-position: 50% 90%
+background-size: contain
+
+# Validation
+
+- Directly at the source
+- Usually can be run in parallel to further processing
 
 ---
 
 background-image: url(dots/detailed-parallel.png)
+background-position: 50% 90%
 background-size: contain
-class: center, bottom
 
-# Same recipe, different inputs
+# Meta-rules
+
+- `evaluate_plan()` et al.
+- tidy evaluation: `!!`
+- *dplyr* manipulation
+- *data.table* manipulation
+- base R manipulation
+
+## Goal: Specify meta-rules in `drake_plan()`
+
+---
+
+# Dynamic plans
+
+```{r dynamic-plan}
+plan <-
+  fs::dir_ls(type = "file") %>%
+  tibble::enframe() %>%
+  dplyr::transmute(
+    target = paste0("hash_", value),
+    command = paste0("digest::digest(file_in('", value, "'))")
+  )
+
+plan
+```
+
+---
+
+# Dynamic plans
+
+```{r dynamic-plan-vis, echo = FALSE, message = FALSE}
+drake_config(plan) %>%
+  vis_drake_graph(
+    full_legend = FALSE,
+    make_imports = FALSE,
+    build_times = "none",
+    width = 700,
+    height = 450
+  )
+```
+
+---
