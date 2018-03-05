@@ -634,3 +634,34 @@ drake_config(plan) %>%
 ```
 
 ---
+
+# Random seeds
+
+```{r random}
+set.seed(123) #<<
+plan <- drake_plan(
+  random = runif(5)
+)
+make(plan, verbose = FALSE)
+readd(random, verbose = FALSE)
+clean(random)
+make(plan, verbose = FALSE)
+readd(random, verbose = FALSE)
+```
+
+
+---
+
+# Triggers
+
+```{r triggers}
+plan <-
+  drake_plan(
+    check = print("*** Checking!"),
+  ) %>% 
+  dplyr::mutate(trigger = "always")
+plan
+make(plan, verbose = FALSE)
+make(plan, verbose = FALSE)
+```
+

@@ -729,6 +729,72 @@ plan
 <script type="application/json" data-for="htmlwidget-e2045036e7a6211c2d88">{"x":{"nodes":{"id":["\"Makefile\"","digest::digest","\"cooking.Rmd\"","\"index.Rmd\"","\"notes.md\"","\"outline.md\"","\"raw_meat.csv\"","\"remake-slides.Rproj\"","\"remake.yml\"","hash_Makefile","hash_cooking.Rmd","hash_index.Rmd","hash_notes.md","hash_outline.md","hash_raw_meat.csv","hash_remake_slides.Rproj","hash_remake.yml"],"label":["\"Makefile\"","digest::digest","\"cooking.Rmd\"","\"index.Rmd\"","\"notes.md\"","\"outline.md\"","\"raw_meat.csv\"","\"remake-slides.Rproj\"","\"remake.yml\"","hash_Makefile","hash_cooking.Rmd","hash_index.Rmd","hash_notes.md","hash_outline.md","hash_raw_meat.csv","hash_remake_slides.Rproj","hash_remake.yml"],"status":["imported","imported","imported","imported","imported","imported","imported","imported","imported","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated"],"type":["file","function","file","file","file","file","file","file","file","object","object","object","object","object","object","object","object"],"level":[0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1],"font.size":[20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20],"color":["#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#1874CD","#000000","#000000","#000000","#000000","#000000","#000000","#000000","#000000"],"shape":["square","triangle","square","square","square","square","square","square","square","dot","dot","dot","dot","dot","dot","dot","dot"],"hover_label":["all: docs/index.html docs/cooking.html\n\n.dots: $(patsubst %.dot,%.png,$(wildcard dots/*.dot))\n\ttouch $@\n\ndots/%.png: docs/dots/%.png\n\tln -sf $(PWD)/$< $@\n\ndocs/dots/%.png: dots/%.dot\n\tdot $< -Tpng -o$@","function (object, algo = c(\"md5\", \"sha1\", \"crc32\", \"sha256\", \n    \"sha512\", \"xxhash32\", \"xxhash64\", \"murmur32\"), serialize = TRUE, \n    file = FALSE, length = Inf, skip = \"auto\", ascii = FALSE, \n    raw = FALSE, seed = 0, errormode = c(\"stop\", \"wa...","---\ntitle: \"Make-like declarative workflows with ![](images/R_logo_45.png)\"\nsubtitle: \"Exercises\"\nauthor: \"Kirill Müller\"\ndate: \"Zurich, 2018-03-05\"\noutput:\n  xaringan::moon_reader:\n    lib_dir: docs/libs\n    nature:\n      highlightStyle: github","---\ntitle: \"Make-like declarative workflows with ![](images/R_logo_45.png)\"\nauthor: \"Kirill Müller\"\ndate: \"Zurich, 2018-03-05\"\noutput:\n  xaringan::moon_reader:\n    lib_dir: docs/libs\n    nature:\n      highlightStyle: github\n      highlightLines: true","## 2\n\nI'd like to start with definitions.  What is a \"reproducible workflow\"?\nIn the context of research, we must differentiate between \"reproducible\" and \"replicable\".\n\n- **Reproducible**: Can obtain same results from same data\n- Replicable: Repe...","# 9:00\n\n- hi, welcome\n- check software installation\n- quick survey\n    - used R\n    - written a function in R\n    - used the pipe in R\n    - created a reproducible analysis with R\n    - used GitHub?","raw meat","Version: 1.0\n\nRestoreWorkspace: Default\nSaveWorkspace: Default\nAlwaysSaveHistory: Default\n\nEnableCodeIndexing: Yes\nUseSpacesForTab: Yes\nNumSpacesForTab: 2\nEncoding: UTF-8","packages:\n- cooking\n\ntargets:\n  all:\n    depends: ragout\n\n  ragout:\n    command: combine(fried_meat, with = I(\"vegetables\"))\n","digest::digest(file_in('Makefile'))","digest::digest(file_in('cooking.Rmd'))","digest::digest(file_in('index.Rmd'))","digest::digest(file_in('notes.md'))","digest::digest(file_in('outline.md'))","digest::digest(file_in('raw_meat.csv'))","digest::digest(file_in('remake-slides.Rproj'))","digest::digest(file_in('remake.yml'))"],"x":[-1,0,-0.75,-0.5,-0.25,0.25,0.5,0.75,1,-1,-0.75,-0.5,-0.125,0.125,0.5,0.75,1],"y":[-1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1]},"edges":{"from":["\"Makefile\"","digest::digest","digest::digest","digest::digest","digest::digest","digest::digest","digest::digest","digest::digest","digest::digest","\"cooking.Rmd\"","\"index.Rmd\"","\"notes.md\"","\"outline.md\"","\"raw_meat.csv\"","\"remake-slides.Rproj\"","\"remake.yml\""],"to":["hash_Makefile","hash_Makefile","hash_cooking.Rmd","hash_index.Rmd","hash_notes.md","hash_outline.md","hash_raw_meat.csv","hash_remake_slides.Rproj","hash_remake.yml","hash_cooking.Rmd","hash_index.Rmd","hash_notes.md","hash_outline.md","hash_raw_meat.csv","hash_remake_slides.Rproj","hash_remake.yml"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"navigationButtons":true,"hover":true}},"groups":null,"width":700,"height":450,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":{"text":"Workflow graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Imported","Object","Function","File"],"color":["#000000","#1874CD","#888888","#888888","#888888"],"shape":["dot","dot","dot","triangle","square"],"font.color":["black","black","black","black","black"],"font.size":[20,20,20,20,20],"id":[2,5,7,8,9]},"nodesToDataframe":true},"igraphlayout":{"type":"square"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","events":{"hoverNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }","blurNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }"}},"evals":["events.hoverNode","events.blurNode"],"jsHooks":[]}</script>
 
 ---
+
+# Random seeds
+
+
+
+```r
+*set.seed(123)
+plan &lt;- drake_plan(
+  random = runif(5)
+)
+make(plan, verbose = FALSE)
+readd(random, verbose = FALSE)
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;[1]&amp;nbsp;0.5818798&amp;nbsp;0.9502068&amp;nbsp;0.4052817&amp;nbsp;0.8609804&amp;nbsp;0.6039763&lt;/div&gt;&lt;/code&gt;
+
+
+```r
+clean(random)
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#afd7d7"&gt;cache&lt;/span&gt;&amp;nbsp;.../.drake&lt;/div&gt;&lt;/code&gt;
+
+
+```r
+make(plan, verbose = FALSE)
+readd(random, verbose = FALSE)
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;[1]&amp;nbsp;0.5818798&amp;nbsp;0.9502068&amp;nbsp;0.4052817&amp;nbsp;0.8609804&amp;nbsp;0.6039763&lt;/div&gt;&lt;/code&gt;
+
+
+
+---
+
+# Triggers
+
+
+
+```r
+plan &lt;-
+  drake_plan(
+    check = print("*** Checking!"),
+  ) %&gt;% 
+  dplyr::mutate(trigger = "always")
+plan
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;#&amp;nbsp;A&amp;nbsp;tibble:&amp;nbsp;1&amp;nbsp;x&amp;nbsp;3&lt;/span&gt;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;target&amp;nbsp;command&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;trigger&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="font-style:italic"&gt;&lt;span style="color:#8a8a8a"&gt;&amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&lt;span style="font-style:italic"&gt;&lt;span style="color:#8a8a8a"&gt;&amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="font-style:italic"&gt;&lt;span style="color:#8a8a8a"&gt;&amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
+&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;1&lt;/span&gt;&amp;nbsp;check&amp;nbsp;&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;print(\"***&amp;nbsp;Checking!\")&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;&amp;nbsp;always&lt;/div&gt;&lt;/code&gt;
+
+
+```r
+make(plan, verbose = FALSE)
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;[1]&amp;nbsp;"***&amp;nbsp;Checking!"&lt;/div&gt;&lt;/code&gt;
+
+
+```r
+make(plan, verbose = FALSE)
+```
+
+&lt;code class="remark-code r"&gt;&lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;[1]&amp;nbsp;"***&amp;nbsp;Checking!"&lt;/div&gt;&lt;/code&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
