@@ -51,7 +51,7 @@ plan <- drake_plan(
 
 Display the plan:
 
-```{r drake-buy-view, exercise=TRUE, exercise.eval = TRUE, exercise.setup = "drake-buy-solution"}
+```{r drake-buy-view, exercise=TRUE, exercise.setup = "drake-buy-solution"}
 plan
 str(plan)
 ```
@@ -76,7 +76,7 @@ make(plan, verbose = FALSE)
 Show the contents of the target:
 
 ```{r drake-buy-readd, exercise=TRUE, exercise.setup = "drake-buy-make-solution-all"}
-readd("...", verbose = FALSE)
+readd(..., verbose = FALSE)
 ```
 
 ```{r drake-buy-need-to-remake}
@@ -130,10 +130,10 @@ plan <- drake_plan(
 make(plan, verbose = FALSE)
 ```
 
-Show the contents of the newly created target:
+Show the contents of the newly created target. What's the effect of `verbose = FALSE`?
 
 ```{r drake-chop-readd, exercise=TRUE, exercise.setup = "drake-chop-make-solution-all"}
-readd("...", verbose = FALSE)
+readd(..., verbose = FALSE)
 ```
 
 Now extend the plan to also fry the chopped meat `with = "oil"`:
@@ -154,15 +154,24 @@ plan <- drake_plan(
 )
 ```
 
+```{r drake-fry-solution-all}
+plan <- drake_plan(
+  meat = buy("meat"),
+  chopped_meat = chop(meat),
+  fried_meat = fry(chopped_meat, with = "oil")
+)
+make(plan, targets = "chopped_meat", verbose = FALSE)
+```
+
 Now execute the `plan` and show the fried meat:
 
-```{r drake-fry-make, exercise=TRUE, exercise.setup = "drake-fry-solution"}
+```{r drake-fry-make, exercise=TRUE, exercise.setup = "drake-fry-solution-all"}
 
 ```
 
 ```{r drake-fry-make-solution, eval = FALSE}
 make(plan)
-readd("fried_meat")
+readd(fried_meat)
 ```
 
 Visualize the dependencies in the plan:
@@ -235,7 +244,7 @@ question("What do we get if we query the value of the `fried_meat` target now?",
 Double-check this:
 
 ```{r drake-garlic-new-plan-without-make, exercise=TRUE, exercise.setup = "drake-garlic-fry-solution-all"}
-readd("fried_meat")
+readd(fried_meat)
 ```
 
 The visualization also shows which targets are up to date.
@@ -295,9 +304,9 @@ Update all targets now, and double-check that they are up to date:
 
 ```{r drake-garlic-make-again-solution, eval = FALSE}
 make(plan)
-readd("meat")
-readd("chopped_meat")
-readd("fried_meat")
+readd(meat)
+readd(chopped_meat)
+readd(fried_meat)
 ```
 
 ## Go to the butcher shop instead
@@ -373,8 +382,8 @@ question("What do we get if we query the value of the `chopped_meat` target now?
 Double-check this:
 
 ```{r drake-butcher-new-plan-without-make, exercise=TRUE, exercise.setup = "drake-butcher-buy-solution-all"}
-readd("meat")
-readd("chopped_meat")
+readd(meat)
+readd(chopped_meat)
 ```
 
 ```{r drake-butcher-need-to-remake-quiz}
@@ -409,9 +418,9 @@ Update all targets now, and double-check that they are up to date:
 
 ```{r drake-butcher-make-again-solution, eval = FALSE}
 make(plan)
-readd("meat")
-readd("chopped_meat")
-readd("fried_meat")
+readd(meat)
+readd(chopped_meat)
+readd(fried_meat)
 ```
 
 ```{r drake-butcher-targets-quiz}
@@ -547,7 +556,7 @@ message("*** Updating targets")
 make()
 
 message("*** Displaying target")
-readd("cooked_potatoes")
+readd(cooked_potatoes)
 ```
 
 
@@ -792,7 +801,7 @@ make(plan, verbose = FALSE)
 Enjoy!
 
 ```{r drake-combine-enjoy, exercise=TRUE, exercise.setup = "drake-combine-run-solution-all"}
-readd("ragout")
+readd(ragout)
 ```
 
 

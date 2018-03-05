@@ -201,8 +201,8 @@ combine(
 combine(
   ragout,
   combine(
-    sliced("cucumber"),
-    diced("tomato"),
+    slice("cucumber"),
+    dice("tomato"),
     "dressing",
     name = "salad"
   ),

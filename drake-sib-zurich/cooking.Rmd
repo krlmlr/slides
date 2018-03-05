@@ -1,5 +1,6 @@
 ---
-title: "cooking"
+title: "Make-like declarative workflows with ![](images/R_logo_45.png)"
+subtitle: "Exercises"
 author: "Kirill Müller"
 date: "Zurich, 2018-03-05"
 output:
@@ -156,7 +157,7 @@ library(drake)
 plan <- drake_plan( #<<
   meat = buy("meat"),
   chopped_meat = chop(meat),
-  fried_meat = fry(meat, with = "oil"),
+  fried_meat = fry(chopped_meat, with = "oil"),
   ragout = combine(fried_meat, with = "vegetables")
 )
 plan
@@ -181,7 +182,7 @@ background-size: contain
 background-position: 0% 90%
 
 ```{r drake-readd}
-readd("ragout") #<<
+readd(ragout) #<<
 ```
 
 ---
@@ -216,8 +217,6 @@ background-position: 0% 90%
 
 ---
 
----
-
 # The pipe
 
 ```{r pipe}
@@ -228,6 +227,3 @@ background-position: 0% 90%
   fry(with = c("oil", "garlic", "chopped meat")) %>%
   combine("mashed potatoes")
 ```
-
----
-
