@@ -111,6 +111,8 @@ background-position: 0% 90%
 
 # Exercises
 
+https://krlmlr.shinyapps.io/cooking-tutorial/
+
 1. Use `buy()` to buy meat
 2. Chop this meat
 3. Fry the chopped meat with oil
@@ -238,7 +240,7 @@ background-position: 0% 90%
 ```
 
 <div id="htmlwidget-ec897849c5c50a6f7846" style="width:504px;height:504px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ec897849c5c50a6f7846">{"x":{"nodes":{"id":["buy","chop","fry","combine","meat","chopped_meat","fried_meat","ragout"],"label":["buy\n0.001s","chop\n0.001s","fry\n0.001s","combine\n0.001s","meat\n0.089s","chopped_meat\n0.051s","fried_meat\n0.011s","ragout\n0.01s"],"status":["imported","imported","imported","imported","up to date","up to date","up to date","up to date"],"type":["function","function","function","function","object","object","object","object"],"level":[0,0,0,0,1,2,3,4],"font.size":[20,20,20,20,20,20,20,20],"color":["#1874CD","#1874CD","#1874CD","#1874CD","#228B22","#228B22","#228B22","#228B22"],"shape":["triangle","triangle","triangle","triangle","dot","dot","dot","dot"],"hover_label":["function (what, from = supermarket()) \n{\n    new_food(paste(\"raw\", what), input = from, provenance = \"bought at\")\n}","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"chopped\", main), input = list(what, ...), \n        provenance = NULL)\n}","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"fried\", main), input = list(what, ...), provenance = NULL)\n}","function (..., name = \"ragout\") \n{\n    new_food(name, list(...))\n}","buy(\"meat\")","chop(meat)","fry(chopped_meat, with = \"oil\")","combine(fried_meat, with = \"vegetables\")"],"x":[-1,-0.333333333333333,0.333333333333333,1,-1,-0.666666666666667,-0.333333333333333,0],"y":[-1,-1,-1,-1,-0.5,0,0.5,1]},"edges":{"from":["buy","chop","meat","chopped_meat","fry","combine","fried_meat"],"to":["meat","chopped_meat","chopped_meat","fried_meat","fried_meat","ragout","ragout"],"arrows":["to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"navigationButtons":true,"hover":true}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":{"text":"Workflow graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Outdated","In progress","Failed","Imported","Missing","Object","Function","File"],"color":["#228B22","#000000","#FF7221","#AA0000","#1874CD","#9A32CD","#888888","#888888","#888888"],"shape":["dot","dot","dot","dot","dot","dot","dot","triangle","square"],"font.color":["black","black","black","black","black","black","black","black","black"],"font.size":[20,20,20,20,20,20,20,20,20],"id":[1,2,3,4,5,6,7,8,9]},"nodesToDataframe":true},"igraphlayout":{"type":"square"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","events":{"hoverNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }","blurNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }"}},"evals":["events.hoverNode","events.blurNode"],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-ec897849c5c50a6f7846">{"x":{"nodes":{"id":["buy","chop","fry","combine","meat","chopped_meat","fried_meat","ragout"],"label":["buy\n0.001s","chop\n0.001s","fry\n0.002s","combine\n0.001s","meat\n0.084s","chopped_meat\n0.054s","fried_meat\n0.014s","ragout\n0.012s"],"status":["imported","imported","imported","imported","up to date","up to date","up to date","up to date"],"type":["function","function","function","function","object","object","object","object"],"level":[0,0,0,0,1,2,3,4],"font.size":[20,20,20,20,20,20,20,20],"color":["#1874CD","#1874CD","#1874CD","#1874CD","#228B22","#228B22","#228B22","#228B22"],"shape":["triangle","triangle","triangle","triangle","dot","dot","dot","dot"],"hover_label":["function (what, from = supermarket()) \n{\n    new_food(paste(\"raw\", what), input = from, provenance = \"bought at\")\n}","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"chopped\", main), input = list(what, ...), \n        provenance = NULL)\n}","function (what, ...) \n{\n    what <- get_what(what)\n    main <- get_main(what)\n    new_food(paste(\"fried\", main), input = list(what, ...), provenance = NULL)\n}","function (..., name = \"ragout\") \n{\n    new_food(name, list(...))\n}","buy(\"meat\")","chop(meat)","fry(chopped_meat, with = \"oil\")","combine(fried_meat, with = \"vegetables\")"],"x":[-1,-0.333333333333333,0.333333333333333,1,-1,-0.666666666666667,-0.333333333333333,0],"y":[-1,-1,-1,-1,-0.5,0,0.5,1]},"edges":{"from":["buy","chop","meat","chopped_meat","fry","combine","fried_meat"],"to":["meat","chopped_meat","chopped_meat","fried_meat","fried_meat","ragout","ragout"],"arrows":["to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"navigationButtons":true,"hover":true}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":{"text":"Workflow graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Outdated","In progress","Failed","Imported","Missing","Object","Function","File"],"color":["#228B22","#000000","#FF7221","#AA0000","#1874CD","#9A32CD","#888888","#888888","#888888"],"shape":["dot","dot","dot","dot","dot","dot","dot","triangle","square"],"font.color":["black","black","black","black","black","black","black","black","black"],"font.size":[20,20,20,20,20,20,20,20,20],"id":[1,2,3,4,5,6,7,8,9]},"nodesToDataframe":true},"igraphlayout":{"type":"square"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","events":{"hoverNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }","blurNode":"function(e){\n        var label_info = this.body.data.nodes.get({\n          fields: ['label', 'hover_label'],\n          filter: function (item) {\n            return item.id === e.node\n          },\n          returnType :'Array'\n        });\n        this.body.data.nodes.update({\n          id: e.node,\n          label : label_info[0].hover_label,\n          hover_label : label_info[0].label\n        });\n      }"}},"evals":["events.hoverNode","events.blurNode"],"jsHooks":[]}</script>
 
 ---
 
@@ -259,6 +261,8 @@ background-position: 0% 90%
 
 # Exercises
 
+https://krlmlr.shinyapps.io/cooking-drake-tutorial/
+
 1. Plan to buy meat with `buy()`
 2. Plan to chop and fry the meat
 3. Fry with garlic instead
@@ -266,6 +270,48 @@ background-position: 0% 90%
 5. Prepare vegetables
 6. Combine the ragout
 7. How to **not** combine the ragout
+
+---
+
+# *drake* and files
+
+
+
+```r
+library(drake)
+plan &lt;- drake_plan(
+* meat = buy(readLines(file_in("raw-meat.txt"))),
+  chopped_meat = chop(meat),
+  fried_meat = fry(chopped_meat, with = "oil"),
+  ragout = combine(fried_meat, with = "vegetables"),
+* saveRDS(ragout, file_out("ragout.rds")),
+  rmarkdown::render(
+*   knitr_in("ragout.Rmd"),
+    output_file = file_out("ragout.md")
+  )
+)
+```
+
+
+
+---
+
+# Exercises
+
+https://github.com/krlmlr/drake-sib-zurich/tree/master/cooking-with-files
+
+1. Save `make.R` as `make-solution.R`, do not edit `make.R`.
+2. Use files to describe the meat and store the ragout.
+3. Run the script.
+4. Edit the `raw-meat.txt` file.
+5. Run `make()`. Do the results align with your expectations?
+6. Create a new text file and use it instead of `raw-meat.txt`. Run `make()`
+   again.
+7. Open the file `cooking-with-files.Rmd`, knit it. How does the code in the
+  `.Rmd` document access the targets we just built?
+8. Extend the plan to knit the document via `rmarkdown::render()`. Remember to
+   use `knitr_in()` for the input file.
+9. Verify that the `.Rmd` is processed if you change inputs or commands.
 
 ---
 

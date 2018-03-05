@@ -112,6 +112,8 @@ background-position: 0% 90%
 
 # Exercises
 
+https://krlmlr.shinyapps.io/cooking-tutorial/
+
 1. Use `buy()` to buy meat
 2. Chop this meat
 3. Fry the chopped meat with oil
@@ -205,6 +207,8 @@ background-position: 0% 90%
 
 # Exercises
 
+https://krlmlr.shinyapps.io/cooking-drake-tutorial/
+
 1. Plan to buy meat with `buy()`
 2. Plan to chop and fry the meat
 3. Fry with garlic instead
@@ -212,6 +216,44 @@ background-position: 0% 90%
 5. Prepare vegetables
 6. Combine the ragout
 7. How to **not** combine the ragout
+
+---
+
+# *drake* and files
+
+```{r drake-drake-plan-files, eval = FALSE}
+library(drake)
+plan <- drake_plan(
+  meat = buy(readLines(file_in("raw-meat.txt"))), #<<
+  chopped_meat = chop(meat),
+  fried_meat = fry(chopped_meat, with = "oil"),
+  ragout = combine(fried_meat, with = "vegetables"),
+  saveRDS(ragout, file_out("ragout.rds")), #<<
+  rmarkdown::render(
+    knitr_in("ragout.Rmd"), #<<
+    output_file = file_out("ragout.md")
+  )
+)
+```
+
+---
+
+# Exercises
+
+https://github.com/krlmlr/drake-sib-zurich/tree/master/cooking-with-files
+
+1. Save `make.R` as `make-solution.R`, do not edit `make.R`.
+2. Use files to describe the meat and store the ragout.
+3. Run the script.
+4. Edit the `raw-meat.txt` file.
+5. Run `make()`. Do the results align with your expectations?
+6. Create a new text file and use it instead of `raw-meat.txt`. Run `make()`
+   again.
+7. Open the file `cooking-with-files.Rmd`, knit it. How does the code in the
+  `.Rmd` document access the targets we just built?
+8. Extend the plan to knit the document via `rmarkdown::render()`. Remember to
+   use `knitr_in()` for the input file.
+9. Verify that the `.Rmd` is processed if you change inputs or commands.
 
 ---
 

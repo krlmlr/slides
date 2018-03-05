@@ -1,5 +1,3 @@
-Cheat sheet!
-
 # 9:00
 
 - hi, welcome
@@ -50,8 +48,8 @@ Cheat sheet!
 # 13:30
 
 - recap: cooking with drake
-- lecture:project setup
-    - IDE setup
+- lecture: project setup
+    - IDE setup: restart R session
     - here
     - files
     - develop plan, validate, run
