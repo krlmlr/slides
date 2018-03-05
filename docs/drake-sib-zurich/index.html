@@ -344,8 +344,7 @@ library(cooking)
 plan &lt;- drake_plan(
   ragout = combine(fried_meat, with = "vegetables"),
   fried_meat = fry(chopped_meat, with = "oil"),
-  chopped_meat = chop(file_in("raw_meat.csv")),
-  strings_in_dots = "literals"
+  chopped_meat = chop(file_in("raw_meat.csv"))
 )
 
 plan
@@ -358,6 +357,12 @@ plan
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;2&lt;/span&gt;&amp;nbsp;fried_meat&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;fry(chopped_meat,&amp;nbsp;with&amp;nbsp;=&amp;nbsp;\"oil\")&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/div&gt;
 &lt;div class="remark-code-line"&gt;&lt;span style="color:#8a8a8a"&gt;#&amp;gt;&lt;/span&gt;&amp;nbsp;&lt;span style="color:#b2b2b2"&gt;3&lt;/span&gt;&amp;nbsp;chopped_meat&amp;nbsp;&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;chop(file_in(\"raw_meat.csv\"))&lt;span style="color:#8a8a8a"&gt;"&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;
 
+
+???
+
+- the plan is a data frame
+- simplest case: static plan
+- easy to create dynamic plans
 
 ---
 
@@ -445,8 +450,7 @@ make(plan)
 plan &lt;- drake_plan(
   ragout = combine(fried_meat, with = "vegetables"),
 * fried_meat = fry(chopped_meat, with = c("oil", "pepper")),
-  chopped_meat = chop(file_in("raw_meat.csv")),
-  strings_in_dots = "literals"
+  chopped_meat = chop(file_in("raw_meat.csv"))
 )
 ```
 

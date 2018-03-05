@@ -26,11 +26,7 @@ Cheat sheet!
 
 - cooking API slides
 - learnr cooking
-- walkthrough solutions
-
-# 10:10
-
-- drake API slides
+- walk through solutions
 
 # 10:30
 
@@ -38,23 +34,10 @@ Cheat sheet!
 
 # 11:00
 
-- project setup
-    - IDE setup
-    - here
-    - files
-    - develop plan, validate, run
-
-- implement project from scratch
-    - file targets
-    - modeling
-    - validation
-    - output files
-
-- knitr documents
-    - access targets
-    - run standalone
-
-- combine with R package
+- drake API slides
+- cooking with drake
+- files and reports
+- cooking files with drake
 
 # 12:30
 
@@ -62,18 +45,33 @@ Cheat sheet!
 
 # 13:30
 
-- parallel processing
+- recap: cooking with drake
+- lecture:project setup
+    - IDE setup
+    - here
+    - files
+    - develop plan, validate, run
 
-- dynamic plans, meta
-    - `plan_analyses()` and `plan_summaries()`
-    - bang-bang
-    - process all files from a directory
+- hands-on
+    - file targets
+    - output files
+    - knitr documents
+        - access targets
+        - run standalone
 
-- random seeds
-
-- triggers
-
-- converting R scripts to drake projects
+- lecture: organization
+    - modeling
+    - validation
+    - combine with R package
+    - parallel processing
+    - dynamic plans, meta
+        - `plan_analyses()` and `plan_summaries()`
+        - `evaluate_plan()`
+        - bang-bang
+        - process all files from a directory
+    - random seeds
+    - triggers
+    - converting R scripts to drake projects
 
 # 15:00
 
